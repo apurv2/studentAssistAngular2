@@ -3,7 +3,9 @@ import { environment } from 'environments/environment';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class SimpleSearchService {
     data: any;
     constructor(public http: Http) {

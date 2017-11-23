@@ -8,9 +8,6 @@ import { Aparment } from 'app/accommodation/shared/models/accommodation.apartmen
 @Component({
     selector: 'simple-search',
     templateUrl: 'accommodation.simple.search.html'
-})@Component({
-    selector: 'simple-search',
-    templateUrl: 'accommodation.simple.search.html'
 })
 
 export class SimpleSearch {
@@ -26,14 +23,14 @@ export class SimpleSearch {
 
     }
     ngOnInit() {
-        this.facebookService.getLoginStatus().then(
-            function (response) {
-                if (response.status === 'connected') {
-                    this.leftSpinnerClick(environment.leftSpinnerValues[0].code);
-                } else {
-                    //  $state.go('leftNav.Login');
-                }
-            });
+        // this.facebookService.getLoginStatus().then(
+        //     function (response) {
+        //         if (response.status === 'connected') {
+        //             this.leftSpinnerClick(environment.leftSpinnerValues[0].code);
+        //         } else {
+        //             //  $state.go('leftNav.Login');
+        //         }
+        //     });
     }
 
     leftSpinnerClick($event) {

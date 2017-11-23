@@ -22,13 +22,17 @@ import { CalendarComponent } from 'app/airport/dashboards/driver/calendar/calend
 import { LandingSearch } from 'app/dashboard/search/landing.search';
 import { LandingSearchService } from 'app/dashboard/search/landing.search.service';
 import { LandingSearchResults } from './dashboard/results/landing.search.results';
+import { SimpleSearchService } from './accommodation/simpleSearch/accommodation.simple.search.service';
+import { SimpleSearchAddsList } from './accommodation/simpleSearch/adsList/simple.search.adds.list';
+import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/simple.search.filters';
+import { SharedDataService } from './shared/data/shared.data.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopHeader,
     LeftNav,
-     SimpleSearch,
+    SimpleSearch,
     AdvancedSearch,
     AddDetails,
     Login,
@@ -39,7 +43,9 @@ import { LandingSearchResults } from './dashboard/results/landing.search.results
     UpcomingComponent,
     CalendarComponent,
     LandingSearch,
-    LandingSearchResults
+    LandingSearchResults,
+    SimpleSearchAddsList,
+    SimpleSearchAddsFilters
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,11 @@ import { LandingSearchResults } from './dashboard/results/landing.search.results
     HttpModule
 
   ],
-  providers: [UniversitiesService, HttpInterceptorService,LandingSearchService
+  providers: [UniversitiesService,
+    HttpInterceptorService,
+    LandingSearchService,
+    SimpleSearchService,
+    SharedDataService
 
   ],
   bootstrap: [AppComponent, TopHeader, LeftNav]
