@@ -4,6 +4,8 @@ import { AccommodationAdd } from "app/accommodation/shared/models/accommodation.
 import { Component } from "@angular/core";
 import { FacebookService } from "ngx-facebook";
 import { Aparment } from 'app/accommodation/shared/models/accommodation.apartments';
+import { SharedDataService } from "../../shared/data/shared.data.service";
+import { AccommodationFilterData } from "../shared/models/accommodation.filter.model";
 
 @Component({
     selector: 'simple-search',
@@ -12,14 +14,12 @@ import { Aparment } from 'app/accommodation/shared/models/accommodation.apartmen
 
 export class SimpleSearch {
     leftSpinnerValues: any = environment.leftSpinnerValues;
-    rightSpinnerValues: any;
-    leftSpinner: string;
-    rightSpinner: string;
     selectedAccommodationAdd: AccommodationAdd;
     apartmentNames: Aparment[];
 
     constructor(private simpleSearchService: SimpleSearchService,
-        private facebookService: FacebookService) {
+        private facebookService: FacebookService,
+        private sharedDataservice: SharedDataService) {
 
     }
     ngOnInit() {
@@ -33,26 +33,12 @@ export class SimpleSearch {
         //     });
     }
 
-    leftSpinnerClick($event) {
-        if ($event == environment.APARTMENT_TYPE) {
 
-            this.rightSpinnerValues = environment.apartmentTypes;
-            this.getSimpleSearchAdds($event, this.rightSpinner);
-        }
-        else if ($event == environment.APARTMENT_NAME) {
-
-            this.simpleSearchService.getAllApartmentnames()
-                .subscribe(res => this.apartmentNames = res.json());
-
-        }
-        else if ($event == environment.GENDER) {
-
-            this.rightSpinnerValues = environment.GENDER_CODES;
-            this.getSimpleSearchAdds($event, this.rightSpinner);
-        }
-
-    }
     getSimpleSearchAdds(leftSpinner, rightSpinner) {
+
+        this.sharedDataservice.getAccommomdationSearchFilters()
+        .subscribe(filter=>{})
+
         rightSpinner = encodeURIComponent(rightSpinner);
         this.simpleSearchService.getSimpleSearchAdds();
     }

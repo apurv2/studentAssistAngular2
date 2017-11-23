@@ -17,7 +17,5 @@ export class AppComponent {
   ngOnInit() {
     this.sharedDataService.getHomePageBackground().
       subscribe(status => this.showSideNav = status);
-      
-    this.router.navigate(['/dashboard/']);
   }
 }
