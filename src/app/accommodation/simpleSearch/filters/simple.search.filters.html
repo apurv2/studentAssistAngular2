@@ -4,10 +4,18 @@
             <form class="form-inline">
                 <div class="form-group">
                     <label class="display-block" for="type1">Type1</label>
-                    <select class="selectpicker" (ngModel)="selectedItem" (ngModelChange)="leftSpinnerClick($event)" >
-                        <option *ngFor="let spinnerValue of leftSpinnerValues" 
-                        [value]="spinnerValue.code">{{spinnerValue.description}}</option>
+
+                    <select class="selectpicker" [(ngModel)]="leftSpinnerSelectedItem" 
+                    (ngModelChange)="leftSpinnerClick($event)"  [ngModelOptions]="{standalone: true}" >
+                        <option *ngFor="let spinnerValue of leftSpinnerValues"
+                        [value]="spinnerValue.description">{{spinnerValue.description}}</option>
                     </select>
+
+                    <!-- <select  [(ngModel)]="selectedCity" (ngModelChange)="leftSpinnerClick($event)"
+                     [ngModelOptions]="{standalone: true}" >
+                        <option *ngFor="let spinnerValue of leftSpinnerValues"  > {{spinnerValue.description}} </option>
+                      </select> -->
+
                 </div>
                 <div class="form-group">
                     <label class="display-block" for="type2">Type2</label>

@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { environment } from "environments/environment";
+import { SharedDataService } from "../../../shared/data/shared.data.service";
+import { AccommodationFilterData } from "../../shared/models/accommodation.filter.model";
+import { environment } from "../../../../environments/environment";
 
 
 @Component({
@@ -13,10 +15,18 @@ export class SimpleSearchAddsFilters {
     rightSpinnerValues = []
     leftSpinner: string;
     rightSpinner: string;
-    selectedItem: string;
+    leftSpinnerSelectedItem: string;
+    rightSpinnerSelectedItem: string;
+
     ngOnInit() {
         this.leftSpinnerValues = environment.leftSpinnerValues;
         this.rightSpinnerValues = environment.apartmentTypes;
+        this.leftSpinnerSelectedItem = this.leftSpinnerValues[0].description;
+        this.rightSpinnerSelectedItem = environment.apartmentTypes[0].description;
+    }
+
+    constructor(private sharedDataService: SharedDataService) {
+
     }
 
     leftSpinnerClick($event) {
@@ -24,7 +34,13 @@ export class SimpleSearchAddsFilters {
         if ($event == environment.APARTMENT_TYPE) {
 
             this.rightSpinnerValues = environment.apartmentTypes;
-            // this.getSimpleSearchAdds($event, this.rightSpinner);
+
+            let filterData: AccommodationFilterData;
+            filterData.leftSpinner = environment.APARTMENT_TYPE;
+            filterData.rightSpinner = this.rightSpinnerSelectedItem;
+
+            this.sharedDataService.setAccommomdationSearchFilters(filterData);
+            // this.getSimpleSearchAdds(environment.APARTMENT_TYPE, this.rightSpinner);
         }
         else if ($event == environment.APARTMENT_NAME) {
 

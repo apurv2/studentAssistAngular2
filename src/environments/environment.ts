@@ -10,11 +10,11 @@ export const environment = {
   NO_OF_ROOMS: "noOfRooms",
   VACANCIES: "vacancies",
   COST: "cost",
-  GENDER: "gender",
+  GENDER: "Gender",
   FBID: "fbId",
   NOTES: "notes",
   USER_ID: "userId",
-  POST_ACCOMMODATION: "createAccommodationAddFromFacebook",
+  POST_ACCOMODATION: "createAccommodationAddFromFacebook",
   POST_ACCOMMODATION_INDV: "createAccommodationAdd",
   ON_CAMPUS: "On-Campus",
   APARTMENT_TYPE: 'Apartment Type',
@@ -31,7 +31,10 @@ export const environment = {
   noOfRooms: ['1 bhk/1 bath', '1 bhk/2 bath', '2 bhk/1 bath', '2 bhk/2 bath',
     '3 bhk/1 bath', '3 bhk/2 bath', '3 bhk/3 bath', 'Shared', 'Other'],
   vacancies: ['1', '2', '3', '4', 'Other', 'Lease Transfer'],
-  GENDER_CODES: [{ "Male": 'Male' }, { "Female": 'Female' }, { "Doesnt Matter": 'Doesnt Matter' }],
+  GENDER_CODES: [{ code: "Male", description: "Male" },
+  { code: "Female", description: "Female" },
+  { code: "Doesnt Matter", description: "Doesnt Matter" },
+  ],
   apartmentTypes: [{
     code: "on",
     description: "On-Campus"
@@ -57,6 +60,6 @@ export const environment = {
     description: "Gender"
   }],
   getUniversityDetailsForUser: 'universities/getUniversityDetailsForUser',
-  accessToken : 'access_token'
+  accessToken: 'access_token'
 
 }
