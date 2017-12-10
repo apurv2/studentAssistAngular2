@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { SharedDataService } from "../../../shared/data/shared.data.service";
-import { AccommodationFilterData } from "../../shared/models/accommodation.filter.model";
 import { environment } from "../../../../environments/environment";
+import { AccommodationSearchModel } from "../../shared/models/accommodation.filter.model";
 
 
 @Component({
@@ -35,7 +35,7 @@ export class SimpleSearchAddsFilters {
             this.rightSpinnerValues = environment.apartmentTypes;
             this.rightSpinnerSelectedItem = environment.apartmentTypes[0].description;
             
-            let filterData: AccommodationFilterData = new AccommodationFilterData();
+            let filterData: AccommodationSearchModel = new AccommodationSearchModel();
             filterData.leftSpinner = environment.APARTMENT_TYPE;
             filterData.rightSpinner = this.rightSpinnerSelectedItem;
             
