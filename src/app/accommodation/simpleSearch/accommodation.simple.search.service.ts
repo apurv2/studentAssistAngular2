@@ -10,14 +10,14 @@ import { AccommodationSearchModel } from '../shared/models/accommodation.filter.
 export class SimpleSearchService {
     data: any;
     constructor(public http: Http) {
-
     }
 
-    getSimpleSearchAdds(filters : AccommodationSearchModel) {
-        return this.http.get('./assets/simpleSearch.json')
+    getSimpleSearchAdds(filters: AccommodationSearchModel) {
+        console.log(JSON.stringify(filters));
+        return this.http.post(environment.url + environment.getSimpleSearchAdds,filters)
             .map(res => this.data = res.json());
     }
-    
+
     getAllApartmentnames() {
         return this.http.get(environment.url).map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'server error'));

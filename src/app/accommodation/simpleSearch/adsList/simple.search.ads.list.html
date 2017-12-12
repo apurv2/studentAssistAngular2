@@ -3,7 +3,7 @@
     <ul class="collapsible popout" data-collapsible="expandable">
       <li *ngFor="let university of accommodationSearchResults">
         <div class="collapsible-header">
-          <img src="{{university.urls}}" />
+          <img class="customClass" src="{{university.urls}}" />
         </div>
         <div class="collapsible-body">
           <div *ngFor="let accommodationAdd of university?.accommodationAdds" class="col-xs-12 col-sm-6 col-md-12">

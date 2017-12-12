@@ -36,6 +36,7 @@ import { LandingFlashCardsService } from './dashboard/flashCards/landing.flash.c
 import { PostAccommodation } from './accommodation/post/accommodation.post';
 import { UserPosts } from './accommodation/post/userPosts/user.posts';
 import { MidSection } from './dashboard/midSection/landing.mid.section';
+import { SimpleSearchFilterService } from './accommodation/simpleSearch/filters/simple.search.filters.service';
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { MidSection } from './dashboard/midSection/landing.mid.section';
     LandingSearchService,
     SimpleSearchService,
     SharedDataService,
-    LandingFlashCardsService
+    LandingFlashCardsService,
+    SimpleSearchFilterService
 
   ],
   bootstrap: [AppComponent, TopHeader, LeftNav]

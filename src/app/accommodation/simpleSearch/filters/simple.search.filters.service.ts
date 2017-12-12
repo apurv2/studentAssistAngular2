@@ -6,7 +6,6 @@ import { AccommodationSearchModel } from "../../shared/models/accommodation.filt
 export class SimpleSearchFilterService {
     constructor(private http: Http) { }
 
-
     getApartmentNames(filterData: AccommodationSearchModel) {
         return this.http.get("").
             map(res => res.json());

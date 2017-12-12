@@ -41,7 +41,7 @@ export class SimpleSearch {
     }
 
     getSimpleSearchAdds(filters: AccommodationSearchModel): Observable<any> {
-        this.universityAccommodationAdds = [];
+        // this.universityAccommodationAdds = [];
         return this.simpleSearchService.getSimpleSearchAdds(filters);
     }
 

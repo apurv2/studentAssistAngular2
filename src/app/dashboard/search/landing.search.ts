@@ -43,11 +43,11 @@ export class LandingSearch {
   addChip(university: University) {
 
     if (this.selectedUniversities.length == 4) {
-      this.openSnackBar("you can select a max of 4 univs", 'Dismiss');
+      this.sharedDataService.openSnackBar(this.snackBar, "you can select a max of 4 univs", 'Dismiss');
     }
     else
       if (this.selectedUniversities.indexOf(university) != -1) {
-        this.openSnackBar("Already Selected", university.univAcronym);
+        this.sharedDataService.openSnackBar(this.snackBar, "Already Selected", university.univAcronym);
       }
       else {
         this.selectedUniversities.push(university);
@@ -64,8 +64,6 @@ export class LandingSearch {
     }
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, { duration: 2000 });
-  }
+
 
 }

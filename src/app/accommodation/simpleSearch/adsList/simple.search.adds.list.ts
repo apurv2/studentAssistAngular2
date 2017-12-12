@@ -17,7 +17,7 @@ export class SimpleSearchAddsList {
 
     constructor(private sharedDataService: SharedDataService) { }
     ngOnInit() {
-        // $('.collapsible').collapsible();
+        $('.collapsible').collapsible();
     }
 
     addClick(accommodationAdd: AccommodationAdd) {
