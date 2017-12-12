@@ -34,15 +34,14 @@ export class SimpleSearch {
     }
 
     subscribeToAccommodationAddsFilters() {
-        this.sharedDataservice.observeAccommomdationSearchFilters()
-            .switchMap(filters => this.getSimpleSearchAdds(filters)).
-            subscribe(universityAccommodationAdds => {
-                console.log("came herer");
-                this.universityAccommodationAdds = universityAccommodationAdds
-            });
+        this.sharedDataservice.observeAccommomdationSearchFilters().
+            switchMap(filters => this.getSimpleSearchAdds(filters)).
+            subscribe(universityAccommodationAdds =>
+                this.universityAccommodationAdds = universityAccommodationAdds);
     }
 
     getSimpleSearchAdds(filters: AccommodationSearchModel): Observable<any> {
+        this.universityAccommodationAdds = [];
         return this.simpleSearchService.getSimpleSearchAdds(filters);
     }
 
