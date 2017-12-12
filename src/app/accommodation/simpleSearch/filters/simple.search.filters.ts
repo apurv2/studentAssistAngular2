@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { SharedDataService } from "../../../shared/data/shared.data.service";
 import { environment } from "../../../../environments/environment";
 import { AccommodationSearchModel } from "../../shared/models/accommodation.filter.model";
+import { University } from "../../shared/models/universities.list.model";
 
 
 @Component({
@@ -34,13 +35,25 @@ export class SimpleSearchAddsFilters {
 
             this.rightSpinnerValues = environment.apartmentTypes;
             this.rightSpinnerSelectedItem = environment.apartmentTypes[0].description;
-            
+
             let filterData: AccommodationSearchModel = new AccommodationSearchModel();
             filterData.leftSpinner = environment.APARTMENT_TYPE;
             filterData.rightSpinner = this.rightSpinnerSelectedItem;
-            
-            // this.sharedDataService.setAccommomdationSearchFilters(filterData);
-            // this.getSimpleSearchAdds(environment.APARTMENT_TYPE, this.rightSpinner);
+
+            let universities: University[] = this.sharedDataService.getUserSelectedUniversitiesList();
+            let universityIds: number[] = new Array<number>();
+            if (universities != null) {
+                for (let university of universities) {
+                    universityIds.push(university.uinversityId);
+                }
+
+                filterData.universityIds = universityIds;
+                this.sharedDataService.emitAccommomdationSearchFilters(filterData);
+
+            }
+            // to be deleted
+            filterData.universityIds = universityIds;
+            this.sharedDataService.emitAccommomdationSearchFilters(filterData);
         }
         else if ($event == environment.APARTMENT_NAME) {
 

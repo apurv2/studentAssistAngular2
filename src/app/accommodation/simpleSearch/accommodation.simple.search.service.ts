@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { AccommodationSearchModel } from '../shared/models/accommodation.filter.model';
 
 @Injectable()
 export class SimpleSearchService {
@@ -12,9 +13,8 @@ export class SimpleSearchService {
 
     }
 
-    getSimpleSearchAdds(leftSpinner, rightSpinner) {
-
-        return this.http.get(environment.url)
+    getSimpleSearchAdds(filters : AccommodationSearchModel) {
+        return this.http.get('./assets/simpleSearch.json')
             .map(res => this.data = res.json());
     }
     

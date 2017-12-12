@@ -28,7 +28,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule,  } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -49,7 +49,7 @@ import { MidSection } from './dashboard/midSection/landing.mid.section';
     MatIconModule,
     MatSnackBarModule,
     MatSelectModule
-    
+
   ],
   declarations: [
     AppComponent,
@@ -85,8 +85,7 @@ import { MidSection } from './dashboard/midSection/landing.mid.section';
 })
 export class AppModule {
 
-  constructor(private fb: FacebookService
-  ) {
+  constructor(private fb: FacebookService) {
     let initParams: InitParams = {
       appId: '931333680308184',
       xfbml: true,
