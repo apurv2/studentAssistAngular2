@@ -30,6 +30,8 @@ export class LandingSearch {
   addOnBlur: boolean = true;
   separatorKeysCodes = [ENTER, COMMA];
   searchBarSubscription: Subscription;
+  selectable: boolean = true;
+  removable: boolean = true;
 
   ngOnInit() {
 
