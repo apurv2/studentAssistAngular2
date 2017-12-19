@@ -37,7 +37,6 @@ export class SimpleSearchAddsFilters {
         this.rightSpinnerValues = environment.apartmentTypes;
         this.leftSpinnerSelectedItem = this.leftSpinnerValues[0];
         this.rightSpinnerSelectedItem = environment.apartmentTypes[0];
-
     }
 
     leftSpinnerClick(clickedItem) {
@@ -61,7 +60,7 @@ export class SimpleSearchAddsFilters {
     }
 
     rightSpinnerClick(clickedItem: string) {
-        this.emitSpinnerClick(false);
+        // this.emitSpinnerClick(false);
     }
 
     emitSpinnerClick(apartmentName: boolean) {

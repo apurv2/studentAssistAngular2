@@ -20,6 +20,13 @@ export class SimpleSearchAddsList {
         $('.collapsible').collapsible();
     }
 
+    ngOnChanges() {
+        if (this.accommodationSearchResults != null && this.accommodationSearchResults.length > 0) {
+            this.sharedDataService.emitAccommodationAdd(
+                this.accommodationSearchResults[0].accommodationAdds[0]);
+        }
+    }
+
     addClick(accommodationAdd: AccommodationAdd) {
         this.sharedDataService.emitAccommodationAdd(accommodationAdd);
     }

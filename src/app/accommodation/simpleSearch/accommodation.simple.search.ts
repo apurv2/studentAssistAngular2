@@ -30,7 +30,6 @@ export class SimpleSearch {
 
     }
     subscribeToAddClick() {
-
         this.accommodationAddSubscription = this.sharedDataservice.observeAccommodationAdd()
             .subscribe(accommodationAdd =>
                 this.selectedAccommodationAdd = accommodationAdd);
