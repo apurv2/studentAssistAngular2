@@ -41,9 +41,8 @@ export class SimpleSearchAddsFilters {
 
     leftSpinnerClick(clickedItem) {
         if (clickedItem == environment.APARTMENT_TYPE) {
-
             this.rightSpinnerValues = environment.apartmentTypes;
-            this.rightSpinnerSelectedItem = environment.apartmentTypes[0];
+            this.rightSpinnerSelectedItem = Object.assign([], environment.apartmentTypes[0]);
             this.emitSpinnerClick(false);
 
         }
@@ -53,7 +52,7 @@ export class SimpleSearchAddsFilters {
         else if (clickedItem == environment.GENDER) {
 
             this.rightSpinnerValues = environment.GENDER_CODES;
-            this.rightSpinnerSelectedItem = environment.GENDER_CODES[0];
+            this.rightSpinnerSelectedItem = Object.assign([], environment.GENDER_CODES[0]);
             this.emitSpinnerClick(false);
         }
     }
