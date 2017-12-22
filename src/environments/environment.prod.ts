@@ -59,5 +59,7 @@ export const environment = {
   universityName: 'universityName',
   getFlashCards: 'getFlashCards',
   getSimpleSearchAdds: 'getSimpleSearchAdds',
-  userSelectedUnivs: 'userSelectedUnivs'
+  userSelectedUnivs: 'userSelectedUnivs',
+  getAllApartmentsWithType: 'getAllApartmentsWithType',
+  getAdvancedSearchAdds: 'getAdvancedSearchAdds'
 };

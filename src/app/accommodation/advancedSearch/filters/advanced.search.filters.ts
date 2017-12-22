@@ -101,4 +101,8 @@ export class AdvancedSearchFilters {
         this.sharedDataService.emitAccommomdationSearchFilters(filterData);
 
     }
+
+    spinnerClick(event) {
+
+    }
 }
