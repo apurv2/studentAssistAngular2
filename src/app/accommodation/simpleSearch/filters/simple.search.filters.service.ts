@@ -5,12 +5,10 @@ import { environment } from "../../../../environments/environment";
 
 @Injectable()
 export class SimpleSearchFilterService {
+
     constructor(private http: Http) { }
 
-
     getApartmentNames(filterData: AccommodationSearchModel) {
-
-
         console.log(environment.url + environment.getAllApartmentsWithType);
         console.log(JSON.stringify(filterData));
         return this.http.post(environment.url + environment.getAllApartmentsWithType, filterData).

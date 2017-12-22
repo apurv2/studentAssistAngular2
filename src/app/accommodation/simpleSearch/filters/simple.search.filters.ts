@@ -92,7 +92,7 @@ export class SimpleSearchAddsFilters {
 
         }
     }
-
+    
     mapApartmentNames(apartments: ApartmentName[]) {
         this.rightSpinnerValues = new Array();
         this.rightSpinnerValues.length = 0;

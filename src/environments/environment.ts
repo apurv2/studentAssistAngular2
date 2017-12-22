@@ -65,5 +65,6 @@ export const environment = {
   getFlashCards: 'getFlashCards',
   getSimpleSearchAdds: 'getSimpleSearchAdds',
   userSelectedUnivs: 'userSelectedUnivs',
-  getAllApartmentsWithType: 'getAllApartmentsWithType'
+  getAllApartmentsWithType: 'getAllApartmentsWithType',
+  getAdvancedSearchAdds: 'getAdvancedSearchAdds'
 }
