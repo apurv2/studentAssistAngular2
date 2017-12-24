@@ -5,7 +5,7 @@ import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
 import { TopHeader } from 'app/shared/topHeader/top.header';
 import { LeftNav } from 'app/shared/leftNav/left.nav';
 import { routing } from 'app/app.routing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdvancedSearch } from 'app/accommodation/advancedSearch/accommodation.advanced.search';
 import { SimpleSearch } from 'app/accommodation/simpleSearch/accommodation.simple.search';
 import { AddDetails } from 'app/accommodation/shared/adDetails/accommodation.details.add';
@@ -28,7 +28,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -55,8 +55,9 @@ import { AdvanceSearchService } from './accommodation/advancedSearch/accommodati
     MatChipsModule,
     MatIconModule,
     MatSnackBarModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,

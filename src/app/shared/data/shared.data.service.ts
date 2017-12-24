@@ -56,4 +56,5 @@ export class SharedDataService {
     openSnackBar(snackbar: MatSnackBar, message: string, action: string) {
         snackbar.open(message, action, { duration: 2000 });
     }
+
 }
