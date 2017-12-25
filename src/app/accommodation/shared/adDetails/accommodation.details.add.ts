@@ -1,6 +1,8 @@
 import { Input, Component } from "@angular/core";
 import { AccommodationAdd } from "../models/accommodation.model";
 import { SharedDataService } from "../../../shared/data/shared.data.service";
+import { MatDialog } from "@angular/material";
+import { SubscribeNotificationsModal } from "app/accommodation/shared/modals/subscribe.notifications.modal";
 
 
 @Component({
@@ -14,7 +16,7 @@ export class AddDetails {
     @Input()
     selectedAccommodationAdd: AccommodationAdd;
 
-
+    constructor(private dialog: MatDialog) { }
     ngOnInit() {
 
     }
@@ -25,6 +27,22 @@ export class AddDetails {
 
     makeLink() {
 
+    }
+
+    subscribe() {
+
+        this.openDialog();
+
+    }
+
+    openDialog(): void {
+        let dialogRef = this.dialog.open(SubscribeNotificationsModal, {
+            width: '250px'
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
     }
 
 }

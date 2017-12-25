@@ -28,7 +28,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -43,6 +43,7 @@ import { Universities } from './universities/universities.list';
 import { AdvancedSearchFilters } from './accommodation/advancedSearch/filters/advanced.search.filters';
 import { AddsList } from './accommodation/shared/adsList/ads.list';
 import { AdvanceSearchService } from './accommodation/advancedSearch/accommodation.advanced.search.service';
+import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/subscribe.notifications.modal';
 
 @NgModule({
   imports: [
@@ -58,6 +59,7 @@ import { AdvanceSearchService } from './accommodation/advancedSearch/accommodati
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   declarations: [
     AppComponent,
@@ -84,7 +86,9 @@ import { AdvanceSearchService } from './accommodation/advancedSearch/accommodati
     NotificationSettingsModal,
     Universities,
     AdvancedSearchFilters,
-    AddsList
+    AddsList,
+    SubscribeNotificationsModal
+
   ],
   providers: [UniversitiesService,
     HttpInterceptorService,
@@ -93,10 +97,12 @@ import { AdvanceSearchService } from './accommodation/advancedSearch/accommodati
     SharedDataService,
     LandingFlashCardsService,
     SimpleSearchFilterService,
-    AdvanceSearchService
+    AdvanceSearchService,
+    MatDialog
 
   ],
-  bootstrap: [AppComponent, TopHeader, LeftNav]
+  bootstrap: [AppComponent, TopHeader, LeftNav],
+  entryComponents: [SubscribeNotificationsModal]
 })
 export class AppModule {
 

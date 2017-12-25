@@ -8,49 +8,52 @@
                             <b>Apartment Information</b>
                         </h3>
                         <form>
-                            <mat-form-field>
-                                <mat-select placeholder="Apartment Type" [(ngModel)]="aptTypeSpinnerSelectedItem.code" (ngModelChange)="spinnerClick($event)"
-                                    [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of aptTypeSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                            <div class="form-group col-md-6">
+                                <mat-form-field>
+                                    <mat-select placeholder="Apartment Type" [(ngModel)]="aptTypeSpinnerSelectedItem.code" (ngModelChange)="spinnerClick($event)"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of aptTypeSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-select placeholder="Apartment Name" [(ngModel)]="aptNameSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of aptNameSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
 
-                            <mat-form-field>
-                                <mat-select placeholder="Apartment Name" [(ngModel)]="aptNameSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
-                                    [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of aptNameSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                                <mat-form-field>
+                                    <mat-select placeholder="University Name" [(ngModel)]="universityNameSpinnerSelectedItem.code" (ngModelChange)="spinnerClick($event)"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of universityNameSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
 
-                            <mat-form-field>
-                                <mat-select placeholder="University Name" [(ngModel)]="universityNameSpinnerSelectedItem.code" (ngModelChange)="spinnerClick($event)"
-                                    [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of universityNameSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                                <mat-form-field>
+                                    <mat-select placeholder="Gender" [(ngModel)]="genderSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)" [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of genderSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <mat-form-field>
+                                    <mat-select placeholder="No Of Rooms" [(ngModel)]="noOfRoomsSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of noOfRoomsSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
 
-                            <mat-form-field>
-                                <mat-select placeholder="Gender" [(ngModel)]="genderSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)" [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of genderSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <mat-select placeholder="No Of Rooms" [(ngModel)]="noOfRoomsSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
-                                    [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of noOfRoomsSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <mat-select placeholder="Vacancies" [(ngModel)]="vacanciesSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
-                                    [ngModelOptions]="{standalone: true}">
-                                    <mat-option *ngFor="let spinnerValue of vacanciesSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                                <mat-form-field>
+                                    <mat-select placeholder="Vacancies" [(ngModel)]="vacanciesSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <mat-option *ngFor="let spinnerValue of vacanciesSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                             <mat-form-field>
                                 <span matPrefix>$&nbsp;</span>
-                                <span matSuffix>.00</span>
                                 <input matInput placeholder="Cost">
                             </mat-form-field>
                             <div class="form-group col-md-12">
