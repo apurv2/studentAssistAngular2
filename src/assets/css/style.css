@@ -163,6 +163,11 @@ a{
 .social-icons{
     margin-bottom: 30px;
 }
+.social-icons i
+{
+    padding-right: 10px;
+    font-size: 24px;
+}
 .margin-bottom-30{
     margin-bottom: 30px;
 }
@@ -909,14 +914,13 @@ box-shadow: 0 3px 6px rgba(0,0,0,.2);
 }
 .search-container
 {
-    width: 55%;
-    margin: 0px 32px;
-    padding: 0px 10px;
-    
-    border-radius: 3px;
+    width: 100%;
+   margin-bottom: 5px;
+   border-radius: 3px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.50);
-    border: 5px solid rgba(255, 255, 255, 1);
+    border: 2px solid rgba(255, 255, 255, 1);
     overflow: hidden;
+    background-color: #fff;
 }
 .mat-chip-list-wrapper { 
        background: white;
@@ -989,6 +993,7 @@ input.mat-chip-input {
     .height-310{
         height: 190px;
     }
+    
     .overlap-content{
         padding: 15px;
     }
@@ -1063,33 +1068,34 @@ input.mat-chip-input {
     }
 }
 .univCardImg {
-    width: 100%;
-	height: 40%;
+    width: 25%;
+    height: 40%;
+    border-radius: 10%;
 }
 .media-left img
 {
     border-radius: 50%;
-    width: 80px;
+    width: 70px;
     border: 1px solid #ccc;
 }
 .panel-body
 {
-    padding: 10px;
+    padding: 3px;
 }
 .univhead{
     position: relative;
     top: 0;
     margin:0px;
-    padding: 15px;
+    padding: 0 15px;
     font-weight: 600;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.5);
-    width: auto;
+    color: #000;
+    width: 100%;
+    font-size: 16px;
 }
 .collapsible-body .card{
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    padding: 3px;
+    border-radius: 5px;
+    margin-bottom: 3px;
 }
 .inline-block
 {
@@ -1107,7 +1113,6 @@ input.mat-chip-input {
     margin-bottom: 5px;
     margin-left: 50px;
 }
-
 /* materialize.min.css for Detail page card expention*/
 .collapsible {
     border-top: 1px solid #ddd;
@@ -1126,13 +1131,17 @@ input.mat-chip-input {
     padding: 1rem;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
+    min-height: 80px;
 }
 .collapsible-body {
     display: none;
     border-bottom: 1px solid #ddd;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 7, 0.3);
+    background: rgba(0, 0, 7, 0.5);
+    color: rgba(0, 0, 7, 0.3);
 }
 .collapsible.popout {
     border: none;
@@ -1151,7 +1160,7 @@ ul:not(.browser-default)>li {
 .collapsible.popout>li.active {
     -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
     box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
-    margin: 16px 0;
+    margin: 0px 15px 0px 0px;
 }
 
 .collapsible.popout>li {
