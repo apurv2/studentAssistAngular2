@@ -9,7 +9,8 @@ import { SimpleSearchFilterService } from '../simpleSearch/filters/simple.search
 import { environment } from '../../../environments/environment';
 import { AccommodationSearchModel } from '../shared/models/accommodation.filter.model';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { ErrorStateMatcher, MatDialog } from '@angular/material';
+import { LoginModal } from 'app/shared/modals/login.modal';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -50,7 +51,8 @@ export class PostAccommodation {
     ]);
 
     constructor(private sharedDataService: SharedDataService,
-        private simpleSearchFilterService: SimpleSearchFilterService) { }
+        private simpleSearchFilterService: SimpleSearchFilterService,
+        private dialog: MatDialog) { }
 
     ngOnInit() {
 
@@ -148,6 +150,19 @@ export class PostAccommodation {
                 this.aptNameSpinnerSelectedItem = Object.assign([], this.aptNameSpinnerValues[0]);
             }
         }
+    }
+
+    postAccommodation() {
+        console.log("clicked here");
+        this.openDialog();
+    }
+
+    openDialog(): void {
+        let dialogRef = this.dialog.open(LoginModal);
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+        });
     }
 
 }

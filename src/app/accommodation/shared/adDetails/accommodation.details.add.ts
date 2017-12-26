@@ -30,19 +30,14 @@ export class AddDetails {
     }
 
     subscribe() {
-
         this.openDialog();
-
     }
 
     openDialog(): void {
-        let dialogRef = this.dialog.open(SubscribeNotificationsModal, {
-            width: '250px'
-        });
+        let dialogRef = this.dialog.open(SubscribeNotificationsModal);
 
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
         });
     }
-
 }

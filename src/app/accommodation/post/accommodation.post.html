@@ -62,9 +62,8 @@
                                 </mat-form-field>
                             </div>
                             <div class="form-group col-md-6">
-                                <mat-form-field class="example-full-width">
+                                <mat-form-field >
                                     <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-                                    <mat-hint>Errors appear instantly!</mat-hint>
                                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                         Please enter a valid email address
                                     </mat-error>
@@ -79,7 +78,7 @@
                                 <input type="file" class="multi with-preview" multiple />
                             </div>
                             <div class="form-group col-md-4 col-md-push-4">
-                                <button type="submit" class="btn primary-btn btn-lg btn-block">Post</button>
+                                <button type="submit" (click)="postAccommodation()"  class="btn primary-btn btn-lg btn-block">Post</button>
                             </div>
                         </form>
                     </div>

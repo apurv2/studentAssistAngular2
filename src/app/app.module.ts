@@ -44,6 +44,7 @@ import { AdvancedSearchFilters } from './accommodation/advancedSearch/filters/ad
 import { AddsList } from './accommodation/shared/adsList/ads.list';
 import { AdvanceSearchService } from './accommodation/advancedSearch/accommodation.advanced.search.service';
 import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/subscribe.notifications.modal';
+import { LoginModal } from 'app/shared/modals/login.modal';
 
 @NgModule({
   imports: [
@@ -59,7 +60,8 @@ import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/sub
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    
   ],
   declarations: [
     AppComponent,
@@ -87,7 +89,8 @@ import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/sub
     Universities,
     AdvancedSearchFilters,
     AddsList,
-    SubscribeNotificationsModal
+    SubscribeNotificationsModal,
+    LoginModal
 
   ],
   providers: [UniversitiesService,
@@ -102,7 +105,7 @@ import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/sub
 
   ],
   bootstrap: [AppComponent, TopHeader, LeftNav],
-  entryComponents: [SubscribeNotificationsModal]
+  entryComponents: [SubscribeNotificationsModal,LoginModal]
 })
 export class AppModule {
 
@@ -113,7 +116,7 @@ export class AppModule {
       version: 'v2.8'
     };
 
-    // fb.init(initParams);
+    fb.init(initParams);
 
   }
 }
