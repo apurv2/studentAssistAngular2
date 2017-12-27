@@ -13,7 +13,7 @@ body{
     margin: 40px 0;
 }
 .padding-0{
-    padding: 0;
+    padding: 0 !important;
 }
 a{
     outline: none;
@@ -946,6 +946,10 @@ input.mat-chip-input {
 .signin-form .mat-form-field
 {
     display: block !important;
+}
+.signin-form .form-group
+{
+    margin-bottom: 0px;
 }
 /*Responsive*/
 @media screen and (min-width:500px) and (max-width:767px){
