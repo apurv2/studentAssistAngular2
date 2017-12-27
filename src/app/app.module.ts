@@ -9,10 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdvancedSearch } from 'app/accommodation/advancedSearch/accommodation.advanced.search';
 import { SimpleSearch } from 'app/accommodation/simpleSearch/accommodation.simple.search';
 import { AddDetails } from 'app/accommodation/shared/adDetails/accommodation.details.add';
-import { Login } from 'app/shared/login/login';
 import { UniversitiesService } from 'app/universities/universities.list.service';
 import { Http, HttpModule, XHRBackend, RequestOptions } from '@angular/http';
-import { httpFactory } from '@angular/http/src/http_module';
 import { HttpInterceptorService } from 'app/shared/Interceptor/HttpInterceptorService';
 import { Dashboard } from 'app/dashboard/landing.dashboard';
 import { DriverComponent } from 'app/airport/dashboards/driver/driver.dashboard';
@@ -45,6 +43,8 @@ import { AddsList } from './accommodation/shared/adsList/ads.list';
 import { AdvanceSearchService } from './accommodation/advancedSearch/accommodation.advanced.search.service';
 import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/subscribe.notifications.modal';
 import { LoginModal } from 'app/shared/modals/login.modal';
+import { httpFactory } from './shared/Interceptor/HttpInterceptorService';
+import { UserService } from 'app/shared/userServices/user.service';
 
 @NgModule({
   imports: [
@@ -61,7 +61,7 @@ import { LoginModal } from 'app/shared/modals/login.modal';
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
-    
+
   ],
   declarations: [
     AppComponent,
@@ -70,7 +70,6 @@ import { LoginModal } from 'app/shared/modals/login.modal';
     SimpleSearch,
     AdvancedSearch,
     AddDetails,
-    Login,
     Dashboard,
     DriverComponent,
     OrganizerComponent,
@@ -101,15 +100,22 @@ import { LoginModal } from 'app/shared/modals/login.modal';
     LandingFlashCardsService,
     SimpleSearchFilterService,
     AdvanceSearchService,
-    MatDialog
+    MatDialog,
+    UserService,
+    {
+      provide: Http,
+      useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions, FacebookService]
+    }
 
   ],
   bootstrap: [AppComponent, TopHeader, LeftNav],
-  entryComponents: [SubscribeNotificationsModal,LoginModal]
+  entryComponents: [SubscribeNotificationsModal, LoginModal]
 })
 export class AppModule {
 
-  constructor(private fb: FacebookService) {
+  constructor(private fb: FacebookService,
+    sharedDataService: SharedDataService) {
     let initParams: InitParams = {
       appId: '931333680308184',
       xfbml: true,
@@ -117,6 +123,5 @@ export class AppModule {
     };
 
     fb.init(initParams);
-
   }
 }

@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  url: 'http://stud.us-east-1.elasticbeanstalk.com/',
+  url: 'http://localhost:8080/',
   production: false,
   APARTMENT_NAME: "apartmentName",
   NO_OF_ROOMS: "noOfRooms",
@@ -57,7 +57,7 @@ export const environment = {
     description: "Gender"
   }],
   getUniversityDetailsForUser: 'universities/getUniversityDetailsForUser',
-  accessToken: 'access_token',
+  accessToken: 'accessToken',
   universityName: 'universityName',
   getFlashCards: 'getFlashCards',
   getSimpleSearchAdds: 'getSimpleSearchAdds',
@@ -79,5 +79,8 @@ export const environment = {
     { code: "3", description: "3" },
     { code: "4", description: "4" },
     { code: "Other", description: "Other" },
-    { code: "Lease Transfer", description: "Lease Transfer" }]
+    { code: "Lease Transfer", description: "Lease Transfer" }],
+  createUser: 'profile/createUser',
+  connected: 'connected',
+  getUserUniversities: 'profile/getUserUniversities'
 }
