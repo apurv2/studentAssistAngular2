@@ -939,11 +939,11 @@ input.mat-chip-input {
     display: none;
     padding: 30px 0;
 }
-.mat-form-field-infix
+.signin-form .mat-form-field-infix
 {
     width: 100% !important;
 }
-.mat-form-field
+.signin-form .mat-form-field
 {
     display: block !important;
 }
