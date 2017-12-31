@@ -36,16 +36,15 @@ import { UserPosts } from './accommodation/post/userPosts/user.posts';
 import { MidSection } from './dashboard/midSection/landing.mid.section';
 import { SimpleSearchFilterService } from './accommodation/simpleSearch/filters/simple.search.filters.service';
 import { ChipsInputExample } from 'app/airport/airport.list';
-import { NotificationSettingsModal } from './notifications/notifications.subscribe.modal';
 import { Universities } from './universities/universities.list';
 import { AdvancedSearchFilters } from './accommodation/advancedSearch/filters/advanced.search.filters';
 import { AddsList } from './accommodation/shared/adsList/ads.list';
 import { AdvanceSearchService } from './accommodation/advancedSearch/accommodation.advanced.search.service';
-import { SubscribeNotificationsModal } from 'app/accommodation/shared/modals/subscribe.notifications.modal';
 import { LoginModal } from 'app/shared/modals/login.modal';
 import { httpFactory } from './shared/Interceptor/HttpInterceptorService';
 import { UserService } from 'app/shared/userServices/user.service';
 import { environment } from 'environments/environment';
+import { SubscribeNotificationsModal } from 'app/notifications/notifications.subscribe.modal';
 
 @NgModule({
   imports: [
@@ -85,7 +84,6 @@ import { environment } from 'environments/environment';
     UserPosts,
     MidSection,
     ChipsInputExample,
-    NotificationSettingsModal,
     Universities,
     AdvancedSearchFilters,
     AddsList,
