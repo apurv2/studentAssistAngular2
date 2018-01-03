@@ -5,7 +5,8 @@ import { NotificationSettings } from 'app/notifications/models/notification.sett
 import { UniversityApartments } from 'app/accommodation/shared/models/university.apartments.model';
 import { SharedDataService } from 'app/shared/data/shared.data.service';
 import { University } from "app/accommodation/shared/models/universities.list.model";
-
+import { CheckBoxModel } from 'app/shared/models/checkbox.model';
+import { Apartment } from 'app/accommodation/shared/models/apartment.names.model';
 
 @Component({
     selector: 'notification-settings',
@@ -21,6 +22,12 @@ export class SubscribeNotificationsModal {
     selectedUniversityDetails: UniversityApartments;
     selectedUniversityId: number;
     universityNames: University;
+    checkboxes = [];
+    genderValues = [
+        'Male',
+        'Female',
+    ];
+    selectedGender: string;
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -42,6 +49,10 @@ export class SubscribeNotificationsModal {
                 this.selectedUniversityId = this.notificationSettings.universityId;
 
                 this.setSelectedUnivAptNames();
+
+                setTimeout(() => {
+                    this.populateCheckBoxNgModel();
+                }, 500);
             });
 
     }
@@ -53,6 +64,26 @@ export class SubscribeNotificationsModal {
                 this.selectedUniversityDetails = university;
             }
         }
+    }
+
+    populateCheckBoxNgModel() {
+
+        for (let aptName of this.selectedUniversityDetails.apartmentNames) {
+
+            let value = this.notificationSettings.apartmentName.
+                indexOf(aptName.apartmentName) != -1 ? true : false;
+
+            this.checkboxes[aptName.apartmentName] = value;
+        }
+
+        for (let aptType of this.notificationSettings.apartmentType) {
+
+            let value = this.notificationSettings.apartmentType.
+                indexOf(aptType) != -1 ? true : false;
+            this.checkboxes[aptType] = value;
+        }
+
+        this.selectedGender = this.notificationSettings.gender;
     }
 }
 

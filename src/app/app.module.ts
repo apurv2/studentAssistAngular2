@@ -26,7 +26,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, MatCheckbox, MatCheckboxModule, MatRadioModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -45,6 +45,8 @@ import { httpFactory } from './shared/Interceptor/HttpInterceptorService';
 import { UserService } from 'app/shared/userServices/user.service';
 import { environment } from 'environments/environment';
 import { SubscribeNotificationsModal } from 'app/notifications/notifications.subscribe.modal';
+import { NotificationSettingsService } from 'app/notifications/notifications.subscribe.modal.service';
+import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifications.filter';
 
 @NgModule({
   imports: [
@@ -61,6 +63,8 @@ import { SubscribeNotificationsModal } from 'app/notifications/notifications.sub
     MatInputModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatCheckboxModule,
+    MatRadioModule
 
   ],
   declarations: [
@@ -83,12 +87,13 @@ import { SubscribeNotificationsModal } from 'app/notifications/notifications.sub
     PostAccommodation,
     UserPosts,
     MidSection,
-    ChipsInputExample,
     Universities,
     AdvancedSearchFilters,
     AddsList,
     SubscribeNotificationsModal,
-    LoginModal
+    LoginModal,
+    NotificationSettingsFilter,
+
 
   ],
   providers: [UniversitiesService,
@@ -101,6 +106,7 @@ import { SubscribeNotificationsModal } from 'app/notifications/notifications.sub
     AdvanceSearchService,
     MatDialog,
     UserService,
+    NotificationSettingsService,
     {
       provide: Http,
       useFactory: httpFactory,

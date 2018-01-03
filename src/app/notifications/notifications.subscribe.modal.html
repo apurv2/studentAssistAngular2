@@ -1,16 +1,50 @@
-<div class="col-sm-12 col-md-12" style="width:600px;">
+<div class="col-sm-12 col-md-12">
     <div class="card">
         <div class="signin-form">
             <h3 class="text-center">
-                <b>Subscribe for push Notification</b>
+                <b>Subscribe for push Notifications</b>
             </h3>
-
-            <div class="form-group col-md-4  col-md-push-2">
-                <button type="submit" class="btn primary-btn btn-width-100 btn-lg btn-block">Ok</button>
-
+            <h4>Apartment Type</h4>
+            <div class="col-sm-4 col-md-4">
+                <mat-checkbox [(ngModel)]="checkboxes['on']">On-Campus</mat-checkbox>
             </div>
-            <div class="form-group col-md-4  col-md-push-2 ">
-                <button type="submit" class="btn secondary-btn btn-lg btn-width-100 btn-block">Cancel</button>
+            <div class="col-sm-4 col-md-4">
+                <mat-checkbox [(ngModel)]="checkboxes['off']">Off-Campus</mat-checkbox>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <mat-checkbox [(ngModel)]="checkboxes['dorms']">Dorms</mat-checkbox>
+            </div>
+
+            <h4>Gender</h4>
+            <mat-radio-group [(ngModel)]="selectedGender">
+                <mat-radio-button *ngFor="let gender of genderValues" [value]="gender">
+                    {{gender}}
+                </mat-radio-button>
+            </mat-radio-group>
+
+            <h4>Apartment Names</h4>
+            <h4>On-campus</h4>
+            <div class="row">
+                <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+            | notificationSettingsFilter : 'on'">
+                    <mat-checkbox [(ngModel)]="checkboxes[apartmentName.apartmentName]">
+                        {{apartmentName.apartmentName}}</mat-checkbox>
+                </div>
+            </div>
+            <h4>Off-campus</h4>
+            <div class="row">
+                <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+            | notificationSettingsFilter : 'off'">
+                    <mat-checkbox [(ngModel)]="checkboxes[apartmentName.apartmentName]">{{apartmentName.apartmentName}}</mat-checkbox>
+                </div>
+            </div>
+
+            <h4>Dorms</h4>
+            <div class="row">
+                <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+            | notificationSettingsFilter : 'dorms'">
+                    <mat-checkbox [(ngModel)]="checkboxes[apartmentName.apartmentName]">{{apartmentName.apartmentName}}</mat-checkbox>
+                </div>
             </div>
         </div>
     </div>
