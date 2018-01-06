@@ -14,4 +14,9 @@ export class NotificationSettingsService {
             map(res => res.json());
     }
 
+    subscribeForNotifications(settings: NotificationSettings) {
+        return this.http.put(environment.subscribeNotifications, settings).
+            map(res => res.json());
+    }
+
 }
