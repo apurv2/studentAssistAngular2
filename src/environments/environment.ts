@@ -84,5 +84,7 @@ export const environment = {
   createUser: 'profile/createUser',
   connected: 'connected',
   getUserUniversities: 'profile/getUserUniversities',
-  getNotificationSettings: 'profile/getNotificationSettings'
+  getNotificationSettings: 'profile/getNotificationSettings',
+  subscribeNotifications: 'profile/subscribeNotifications',
+  all: 'all'
 }
