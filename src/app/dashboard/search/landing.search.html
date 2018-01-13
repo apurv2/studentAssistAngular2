@@ -16,7 +16,7 @@
                         </mat-chip>
 
                         <input [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-                            (keyup)="searchTerm$.next($event.target.value)" [(ngModel)]="searchBarText" class=" form-control type-search"
+                            (keyup)="searchTerm$.next($event.target.value)" (keyup.enter)="onEnterClicked()" [(ngModel)]="searchBarText" class=" form-control type-search"
                             [ngModelOptions]="{standalone: true}" placeholder="Enter University Name(s)...">
 
                     </mat-chip-list>
