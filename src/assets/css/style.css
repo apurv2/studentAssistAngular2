@@ -77,6 +77,9 @@ a{
 .width-80{
     width: 80px;
 }
+.width-120{
+    width: 120px;
+}
 .height-400{
     height: 400px;
 }
@@ -1103,9 +1106,35 @@ input.mat-chip-input {
   button.social-signin.google {
     background: #DD4B39;
   }
+  .signin-form label
+  {
+    font-weight: 400;
+  }
+  .mat-radio-button,.mat-checkbox, b {
+    font-family: 'Josefin Sans', sans-serif !important;
+}
+.mat-radio-label-content
+{
+    padding: 0px 10px 0px 5px !important;
+}
+label
+{
+    font-weight: 400 !important;
+}
+.subscription .card
+{
+    border: 0px;
+    box-shadow:none;
+}
+.notification-form
+{
+    padding: 0 20px;
+    max-height: 400px;
+    overflow: auto;
+    max-width: 900px;
+}
 /*End Login*/
 /*FB like div*/
-
 /*END FB like div*/
 /*Responsive*/
 @media screen and (min-width:500px) and (max-width:767px){
