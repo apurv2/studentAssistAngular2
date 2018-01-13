@@ -26,8 +26,11 @@ export class LoginModal {
 
     login() {
         this.userService.login().
-            map(resp => this.userService.createOrUpdateUser()).
-            subscribe(resp => this.dialogRef.close());
+            flatMap(resp => this.userService.createOrUpdateUser()).
+            subscribe(resp => {
+                console.log(resp);
+                this.dialogRef.close()
+            });
     }
 
     onNoClick(): void {

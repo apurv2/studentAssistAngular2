@@ -35,7 +35,6 @@ import { PostAccommodation } from './accommodation/post/accommodation.post';
 import { UserPosts } from './accommodation/post/userPosts/user.posts';
 import { MidSection } from './dashboard/midSection/landing.mid.section';
 import { SimpleSearchFilterService } from './accommodation/simpleSearch/filters/simple.search.filters.service';
-import { ChipsInputExample } from 'app/airport/airport.list';
 import { Universities } from './universities/universities.list';
 import { AdvancedSearchFilters } from './accommodation/advancedSearch/filters/advanced.search.filters';
 import { AddsList } from './accommodation/shared/adsList/ads.list';

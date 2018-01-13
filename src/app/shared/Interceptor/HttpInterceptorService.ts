@@ -52,7 +52,9 @@ export class HttpInterceptorService extends Http {
   }
 
   private updateUrl(req: string) {
-    return environment.url + req;
+    let finalUrl: string = environment.url + req;
+    console.log(finalUrl);
+    return finalUrl;
 
   }
 

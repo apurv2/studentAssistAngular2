@@ -25,11 +25,12 @@ export class UserService {
         let universityIds: number[] = new Array();
         let user: UserModel = new UserModel();
 
-        for (let university of userUniversities) {
-            universityIds.push(university.universityId);
+        if (userUniversities && userUniversities.length > 0) {
+            for (let university of userUniversities) {
+                universityIds.push(university.universityId);
+            }
+            user.selectedUniversityIds = universityIds;
         }
-        user.selectedUniversityIds = universityIds;
-
         return this.http.put(environment.createUser, user).
             map(res => res.json());
     }

@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'on'">
-                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName].value">
+                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">
                                 {{apartmentName.apartmentName}}</mat-checkbox>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'off'">
-                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
+                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                     <div class="row">
                         <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'dorms'">
-                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
+                            <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                         </div>
                     </div>
                 </div>
