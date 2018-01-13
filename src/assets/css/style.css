@@ -160,13 +160,33 @@ a{
 .btn-width-100{
     width: 100px;
 }
+.detail-card{
+    margin-top:10px; 
+}
+.image-container
+{
+    height: 320px;
+}
+.posted-by
+{
+    text-transform: capitalize;
+}
+.search-container .mat-form-field-wrapper
+{
+    padding-bottom: 0 !important;
+}
+.search-container .mat-form-field-underline
+{
+    position: unset !important;
+}
 .social-icons{
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 .social-icons i
 {
     padding-right: 10px;
-    font-size: 24px;
+    font-size: 30px;
+    color: #fb6362;
 }
 .margin-bottom-30{
     margin-bottom: 30px;
@@ -289,8 +309,12 @@ line-height: 24px;
 .mat-form-field
 {
     padding: 0px 10px 0px 10px;
+    font-family: 'Josefin Sans', sans-serif !important;
 }
-
+.mat-option, .mat-select
+{
+    font-family: 'Josefin Sans', sans-serif !important;
+}
 .useraccount .media-body, .useraccount .media-left{
     vertical-align: middle;
 }
@@ -416,6 +440,14 @@ line-height: 24px;
     height: 320px;
     transition: all 0.1s;
 }
+.no-record{
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+    font-weight: 800;
+    margin: 0px 5px;
+    display: none;
+}
 .card{
     background: #fff;
     border-radius: 3px;
@@ -537,7 +569,8 @@ line-height: 24px;
 .overlap-content{
     position: absolute;
     width: 100%;
-    padding: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 
@@ -1043,7 +1076,6 @@ input.mat-chip-input {
     border: none;
     border-radius: 2px;
     color: #FFF;
-    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     transition: 0.2s ease;
     cursor: pointer;
@@ -1072,6 +1104,9 @@ input.mat-chip-input {
     background: #DD4B39;
   }
 /*End Login*/
+/*FB like div*/
+
+/*END FB like div*/
 /*Responsive*/
 @media screen and (min-width:500px) and (max-width:767px){
     .responsive-50{
@@ -1221,7 +1256,7 @@ input.mat-chip-input {
     width: 100%;
     font-size: 16px;
 }
-.collapsible-body .card{
+.collapsible-body .card, .adv-card-list .card{
     padding: 3px;
     border-radius: 5px;
     margin-bottom: 3px;
@@ -1261,6 +1296,16 @@ input.mat-chip-input {
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     min-height: 80px;
+}
+.adv-card-list{
+    border-bottom: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: rgba(0, 0, 7, 0.3);
+    background: rgba(0, 0, 7, 0.5);
+    color: rgba(0, 0, 7, 0.3);
+    margin-top: 6px;
 }
 .collapsible-body {
     display: none;
