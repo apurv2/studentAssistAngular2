@@ -4,31 +4,49 @@
             <h2 class="pull-left margin-top-0">{{selectedAccommodationAdd?.apartmentName}}</h2>
             <span class="label price-label pull-right dark-bg font-size-18">${{selectedAccommodationAdd?.cost}}</span>
         </div>
-        <img src="./assets/images/business.jpg" alt="" width="100%" />
+        <div ng2-carouselamos class="slides-wrapper" [items]="items" [width]="900" [$prev]="prev" [$next]="next" [$item]="item">
+        </div>
+        <ng-template #prev>
+            <i class="material-icons" id="left">keyboard_arrow_left</i>
+        </ng-template>
+        <ng-template #next>
+            <i class="material-icons" id="left">keyboard_arrow_right</i>
+        </ng-template>
+        <ng-template #item let-item let-i="index">
+
+            <div class="items">
+                <img src="{{ item.name }}">
+            </div>
+
+        </ng-template>
+
+
     </div>
     <div class="panel-footer white-bg padding-30">
         <div class="row">
             <div class="col-sm-9">
-                    <p class="text-muted address">
-                            <b>Mapple road, taxes North main road</b>
-                        </p>
-                    
-                <p class="text-muted address"> 
-                       On-Campus 
-                    </p>
-               
-                <p class="text-muted address"> 
+                <p class="text-muted address">
+                    <b>Mapple road, taxes North main road</b>
+                </p>
+
+                <p class="text-muted address">
+                    On-Campus
+                </p>
+
+                <p class="text-muted address">
                     1 bhk / 1 bath for Male (2 Vacancies)
                 </p>
-               <p class="text-muted address">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ... The first word, “Lorem,” isn't even a word; instead it's a piece of the word “dolorem,” meaning pain, suffering, or sorrow.
+                <p class="text-muted address">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    ... The first word, “Lorem,” isn't even a word; instead it's a piece of the word “dolorem,” meaning pain,
+                    suffering, or sorrow.
                 </p>
-                
+
             </div>
             <div class="col-sm-3">
                 <div class="social-icons">
                     <span>
-                        <a href="javascript:void(0)"(click)="subscribe()">
+                        <a href="javascript:void(0)" (click)="subscribe()">
                             <i class="fa fa-rss-square" aria-hidden="true"></i>
                         </a>
                     </span>
@@ -43,10 +61,10 @@
                         </a>
                     </span>
                     <span>
-                            <a href="#">
-                                <i aria-hidden="true" class="fa fa-envelope-square"></i>
-                            </a>
-                        </span>
+                        <a href="#">
+                            <i aria-hidden="true" class="fa fa-envelope-square"></i>
+                        </a>
+                    </span>
                 </div>
                 <p class="text-muted posted-by">{{selectedAccommodationAdd?.notes}}</p>
                 <!-- <div class="form-group xs-display-inline">

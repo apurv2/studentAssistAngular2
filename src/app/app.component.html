@@ -1,10 +1,50 @@
 <div class="wrapper">
     <div class="banner">
-       
+
         <div [class.banner-background]="showSideNav">
-                 <top-header></top-header>
-                 <left-nav></left-nav>
-                 <router-outlet></router-outlet>
+            <top-header></top-header>
+            <mat-sidenav-container class="example-container">
+                <mat-sidenav position="end" #sidenav [mode]="over">
+
+                    <div id="mySidenav" [class.sa-ease-in-out-transition]="showSideNav" class="sidenav useraccount">
+                        <a href="javascript:void(0)" class="closebtn">&times;</a>
+                        <ul class="list-unstyled">
+                            <li>
+                                <div class="media">
+                                    <div class="media-left">
+                                        <div class="user-thumb red-indicator">
+                                            <img src="http://graph.facebook.com/{{userInfo?.userId}}/picture?type=normal" class="media-object img-responsive img-circle">
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="user-name" title="Diego Buchanan">
+                                            {{userInfo?.fullName}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#" class="active">Edit Profile</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="openPostAccommodation()">Post Accomodation</a>
+                            </li>
+                            <li>
+                                <a href="#">My Posts</a>
+                            </li>
+                            <li>
+                                <a href="#">Notifications</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" (click)="logout()">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-sidenav>
+                <mat-sidenav-content>
+                    <router-outlet></router-outlet>
+                </mat-sidenav-content>
+            </mat-sidenav-container>
         </div>
     </div>
-</div> 
+</div>

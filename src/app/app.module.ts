@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
 import { TopHeader } from 'app/shared/topHeader/top.header';
-import { LeftNav } from 'app/shared/leftNav/left.nav';
 import { routing } from 'app/app.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdvancedSearch } from 'app/accommodation/advancedSearch/accommodation.advanced.search';
@@ -26,7 +25,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, MatCheckbox, MatCheckboxModule, MatRadioModule, } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, MatCheckbox, MatCheckboxModule, MatRadioModule, MatSidenavModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -46,6 +45,7 @@ import { environment } from 'environments/environment';
 import { SubscribeNotificationsModal } from 'app/notifications/notifications.subscribe.modal';
 import { NotificationSettingsService } from 'app/notifications/notifications.subscribe.modal.service';
 import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifications.filter';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   imports: [
@@ -63,13 +63,15 @@ import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifica
     ReactiveFormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    Ng2CarouselamosModule,
+    MatSidenavModule,
+
 
   ],
   declarations: [
     AppComponent,
     TopHeader,
-    LeftNav,
     SimpleSearch,
     AdvancedSearch,
     AddDetails,
@@ -113,7 +115,7 @@ import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifica
     }
 
   ],
-  bootstrap: [AppComponent, TopHeader, LeftNav],
+  bootstrap: [AppComponent, TopHeader],
   entryComponents: [SubscribeNotificationsModal, LoginModal]
 })
 export class AppModule {
