@@ -1,21 +1,28 @@
-<div class="col-sm-12 col-md-12 subscription">
-    <div class="card">
-        <div class="notification-form">
-            <h3 class="text-center">
+<div class="card">
+    <div class="col-sm-12 col-md-12 subscription">
+            <div class="row popup-head">
+            <h3>
                 <b>Subscribe for Push Notifications</b>
             </h3>
+            <span>
+                    You will get a notitifications whenever new vacancy added in subscribe apartment!!!"
+            </span>
+        </div>    
+        <div class="notification-form">
+            
             <div *ngIf="showUnivs">
                 <div class="row">
-                    <h4><b>Select a University</b></h4>
+                    <h4>Please select a university</h4>
                 
                 <mat-radio-group [(ngModel)]="selectedUniversityId">
-                    <mat-radio-button *ngFor="let university of allUniversities" [value]="university.universityId">
+                    <mat-radio-button class="col-sm-8 col-md-8" *ngFor="let university of allUniversities" [value]="university.universityId">
                         {{university.universityName}}
                     </mat-radio-button>
                 </mat-radio-group>
+               
                 <span>
                     <a href="javascript:void(0)" (click)="selectUniversity()">
-                        <i class="fa fa-2x fa-chevron-circle-right" aria-hidden="true"></i>
+                        <i class="fa fa-2x fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </span>
             </div>
@@ -23,29 +30,37 @@
 
             <div *ngIf="!showUnivs">
                     <div class="row">
-                <span>
+                <span class="back-arrow">
                     <a href="javascript:void(0)" (click)="backClicked()">
-                        <i class="fa fa-2x fa-chevron-circle-left" aria-hidden="true"></i>
+                        <i class="fa fa-2x fa-arrow-left" aria-hidden="true"></i>
                     </a>
                 </span>
-
-                <h4><b>Apartment Type</b></h4>
-                <mat-checkbox (click)="checkUnCheckBoxes('on')" [(ngModel)]="aptTypeCheckboxes['on']">On-Campus</mat-checkbox>
-                <mat-checkbox (click)="checkUnCheckBoxes('off')" [(ngModel)]="aptTypeCheckboxes['off']">Off-Campus</mat-checkbox>
-                <mat-checkbox (click)="checkUnCheckBoxes('dorms')" [(ngModel)]="aptTypeCheckboxes['dorms']">Dorms</mat-checkbox>
-               
-
-                <h4><b>Gender</b></h4>
+                </div>
+                <div class="row">
+                <h4>Apartment Type</h4>
+                <div class="border"></div>
+                <div class="col-sm-4 col-md-4"><mat-checkbox (click)="checkUnCheckBoxes('on')" [(ngModel)]="aptTypeCheckboxes['on']">On-Campus</mat-checkbox></div>
+                <div class="col-sm-4 col-md-4"><mat-checkbox (click)="checkUnCheckBoxes('off')" [(ngModel)]="aptTypeCheckboxes['off']">Off-Campus</mat-checkbox></div>
+                <div class="col-sm-4 col-md-4"><mat-checkbox (click)="checkUnCheckBoxes('dorms')" [(ngModel)]="aptTypeCheckboxes['dorms']">Dorms</mat-checkbox></div>
+               </div>
+               <div class="row">
+                <h4>Gender</h4>
+                <div class="border"></div>
                 <mat-radio-group [(ngModel)]="selectedGender">
-                    <mat-radio-button *ngFor="let gender of genderValues" [value]="gender">
+                    <mat-radio-button class="col-sm-4 col-md-4" *ngFor="let gender of genderValues" [value]="gender">
                         {{gender}}
                     </mat-radio-button>
+                    <mat-radio-button class="col-sm-4 col-md-4">Doesn't matter</mat-radio-button>
                 </mat-radio-group>
-                <h4><b>Apartment Names</b></h4>
+                </div>
+                <div class="row">
+                <h4>Apartment Names</h4>
+                
                 <div *ngIf="aptTypeVisibility.on">
                     <h4>On-campus</h4>
+                    <div class="border"></div>
                     <div class="row">
-                        <div class="col-sm-3 col-md-3" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+                        <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'on'">
                             <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">
                                 {{apartmentName.apartmentName}}</mat-checkbox>
@@ -54,8 +69,9 @@
                 </div>
                 <div *ngIf="aptTypeVisibility.off">
                     <h4>Off-campus</h4>
+                    <div class="border"></div>
                     <div class="row">
-                        <div class="col-sm-3 col-md-3" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+                        <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'off'">
                             <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                         </div>
@@ -63,8 +79,9 @@
                 </div>
                 <div *ngIf="aptTypeVisibility.dorms">
                     <h4>Dorms</h4>
+                    <div class="border"></div>
                     <div class="row">
-                        <div class="col-sm-3 col-md-3" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
+                        <div class="col-sm-4 col-md-4" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'dorms'">
                             <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                         </div>
