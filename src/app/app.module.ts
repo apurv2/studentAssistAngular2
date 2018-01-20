@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
-import { TopHeader } from 'app/shared/topHeader/top.header';
 import { routing } from 'app/app.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdvancedSearch } from 'app/accommodation/advancedSearch/accommodation.advanced.search';
@@ -25,7 +24,7 @@ import { SimpleSearchAddsFilters } from './accommodation/simpleSearch/filters/si
 import { SharedDataService } from './shared/data/shared.data.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, MatCheckbox, MatCheckboxModule, MatRadioModule, MatSidenavModule, } from '@angular/material';
+import { MatChipsModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatInputModule, MatNativeDateModule, MatDialog, MatDialogModule, MatCheckbox, MatCheckboxModule, MatRadioModule, MatSidenavModule, MatListModule, } from '@angular/material';
 
 import 'hammerjs';
 import { LandingFlashCards } from './dashboard/flashCards/landing.flash.cards';
@@ -66,12 +65,12 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     MatRadioModule,
     Ng2CarouselamosModule,
     MatSidenavModule,
+    MatListModule
 
 
   ],
   declarations: [
     AppComponent,
-    TopHeader,
     SimpleSearch,
     AdvancedSearch,
     AddDetails,
@@ -115,7 +114,7 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     }
 
   ],
-  bootstrap: [AppComponent, TopHeader],
+  bootstrap: [AppComponent],
   entryComponents: [SubscribeNotificationsModal, LoginModal]
 })
 export class AppModule {
