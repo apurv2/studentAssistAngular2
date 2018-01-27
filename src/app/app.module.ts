@@ -46,6 +46,9 @@ import { environment } from 'environments/environment';
 import { SubscribeNotificationsModal } from 'app/notifications/notifications.subscribe.modal';
 import { NotificationSettingsService } from 'app/notifications/notifications.subscribe.modal.service';
 import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifications.filter';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { PostAccommodationService } from 'app/accommodation/post/accommodation.post.service';
+
 
 @NgModule({
   imports: [
@@ -63,7 +66,8 @@ import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifica
     ReactiveFormsModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    Ng2CloudinaryModule
 
   ],
   declarations: [
@@ -106,6 +110,7 @@ import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifica
     MatDialog,
     UserService,
     NotificationSettingsService,
+    PostAccommodationService,
     {
       provide: Http,
       useFactory: httpFactory,

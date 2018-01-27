@@ -11,6 +11,9 @@ import { AccommodationSearchModel } from '../shared/models/accommodation.filter.
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher, MatDialog } from '@angular/material';
 import { LoginModal } from 'app/shared/modals/login.modal';
+import { CloudinaryUploader } from 'ng2-cloudinary/dist/esm/src/cloudinary-uploader.service';
+import { CloudinaryOptions } from 'ng2-cloudinary/dist/esm/src/cloudinary-options.class';
+import { PostAccommodationService } from 'app/accommodation/post/accommodation.post.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -43,16 +46,18 @@ export class PostAccommodation {
     selectedUniversities: University[];
     allApartments: Apartment[];
     matcher = new MyErrorStateMatcher();
-
+    photos: File[] = [];
 
     emailFormControl = new FormControl('', [
         Validators.required,
         Validators.email,
     ]);
 
+
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
-        private dialog: MatDialog) { }
+        private dialog: MatDialog,
+        private postAccommodationService: PostAccommodationService) { }
 
     ngOnInit() {
 
@@ -157,8 +162,7 @@ export class PostAccommodation {
     }
 
     postAccommodation() {
-        console.log("clicked here");
-        this.openDialog();
+        this.uploadImages();
     }
 
     openDialog(): void {
@@ -167,6 +171,33 @@ export class PostAccommodation {
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
         });
+    }
+
+    addFile(files: any) {
+
+        for (let photoFile of files.files) {
+            let reader = new FileReader();
+            reader.onload = (e) => this.photos.push(e.target['result']);
+            reader.readAsDataURL(photoFile);
+        }
+
+
+    }
+
+    uploadImages() {
+        const params = this.createUploadParams();
+        this.postAccommodationService.postImages('https://api.cloudinary.com/v1_1/duf1ntj7z/upload', params)
+            .subscribe(data => {
+                console.log('response', data);
+            });
+    }
+
+    private createUploadParams() {
+        let formData: FormData = new FormData();
+        formData.append('upload_preset', 'foan0ieg');
+        formData.append('file', this.photos[0]);
+        
+        return formData;
     }
 
 }

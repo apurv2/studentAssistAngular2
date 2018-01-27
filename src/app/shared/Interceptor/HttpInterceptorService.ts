@@ -52,7 +52,8 @@ export class HttpInterceptorService extends Http {
   }
 
   private updateUrl(req: string) {
-    let finalUrl: string = environment.url + req;
+
+    let finalUrl: string = req.indexOf("cloudinary") == -1 ? environment.url + req : req;
     console.log(finalUrl);
     return finalUrl;
 
@@ -66,6 +67,8 @@ export class HttpInterceptorService extends Http {
       options.headers = new Headers();
     }
     options.headers.append('Content-Type', 'application/json');
+    options.headers.append('X-Requested-With', 'XMLHttpRequest');
+
     this.createAuthorizationHeader(options.headers);
 
     return options;
