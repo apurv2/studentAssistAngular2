@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Component({
-    selector: 'dlogin-modal',
+    selector: 'login-modal',
     templateUrl: 'login.modal.html',
 })
 export class LoginModal {
