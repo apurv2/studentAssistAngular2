@@ -1400,6 +1400,11 @@ top:15px;
     cursor: pointer;
     
 }
+.active-card
+{
+    border: 3px dotted #fb6362;
+    padding: 15px !important;    
+}
 .user-posts .card{
     padding: 10px;
     margin-bottom: 10px;
