@@ -34,14 +34,15 @@ export class TopHeader {
 
     openNav() {
         document.getElementById("mySidenav").style.width = "250px";
-        // document.getElementById("nav-overlay").style.display = "block";
+        
+        document.getElementById("navoverlap").style.display = "block";
 
         this.showSideNav = true;
     }
 
     closeNav() {
         document.getElementById("mySidenav").style.width = "0px";
-        // document.getElementById("nav-overlay").style.display = "none";
+        document.getElementById("navoverlap").style.display = "none";
 
         this.showSideNav = false;
     }
