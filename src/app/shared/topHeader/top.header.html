@@ -10,12 +10,44 @@
     </div>
     <div class="col-sm-9 col-xs-6">
       <div class="menu useraccount margin-top-20">
-        <button class="btn btn-default pull-right" type="button" (click)="sidenav.toggle()">
+        <button class="btn btn-default pull-right" type="button" (click)="openNav()">
           <i class="material-icons">menu</i>
         </button>
       </div>
     </div>
-    
+    <div id="mySidenav" [class.sa-ease-in-out-transition]="showSideNav" class="sidenav useraccount">
+      <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+      <ul class="list-unstyled">
+        <li>
+          <div class="media">
+            <div class="media-left">
+              <div class="user-thumb red-indicator">
+                <img src="http://graph.facebook.com/{{userInfo?.userId}}/picture?type=normal" class="media-object img-responsive img-circle">
+              </div>
+            </div>
+            <div class="media-body">
+              <div class="user-name" title="Diego Buchanan">
+                {{userInfo?.fullName}}
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="#" class="active">Edit Profile</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="openPostAccommodation()">Post Accomodation</a>
+        </li>
+        <li>
+          <a href="#">My Posts</a>
+        </li>
+        <li>
+          <a href="#">Notifications</a>
+        </li>
+        <li>
+          <a href="javascript:void(0)" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
-<div class="nav-overlap" id="navoverlap"></div>
