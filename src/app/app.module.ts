@@ -48,6 +48,7 @@ import { NotificationSettingsService } from 'app/notifications/notifications.sub
 import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifications.filter';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 import { PostAccommodationService } from 'app/accommodation/post/accommodation.post.service';
+import { SuccessOrFailureModal } from 'app/shared/modals/success.or.failure';
 
 
 @NgModule({
@@ -96,7 +97,7 @@ import { PostAccommodationService } from 'app/accommodation/post/accommodation.p
     SubscribeNotificationsModal,
     LoginModal,
     NotificationSettingsFilter,
-
+    SuccessOrFailureModal
 
   ],
   providers: [UniversitiesService,
@@ -119,7 +120,7 @@ import { PostAccommodationService } from 'app/accommodation/post/accommodation.p
 
   ],
   bootstrap: [AppComponent, TopHeader, LeftNav],
-  entryComponents: [SubscribeNotificationsModal, LoginModal]
+  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal]
 })
 export class AppModule {
 
