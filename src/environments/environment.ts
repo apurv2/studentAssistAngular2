@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  url: 'http://stud.us-east-1.elasticbeanstalk.com/',
+  url: 'http://localhost:8080/',
   production: false,
   appId: '931333680308184',
   APARTMENT_NAME: "apartmentName",
@@ -86,5 +86,11 @@ export const environment = {
   getUserUniversities: 'profile/getUserUniversities',
   getNotificationSettings: 'profile/getNotificationSettings',
   subscribeNotifications: 'profile/subscribeNotifications',
-  all: 'all'
+  all: 'all',
+  createAccommodationAdd: 'profile/createAccommodationAdd',
+  cloudinaryURL: 'https://api.cloudinary.com/v1_1/duf1ntj7z/upload',
+  CLOUDINARY_PRESET_VALUE: 'qdisf7f1',
+  upload_preset: 'upload_preset',
+  file: 'file',
+  success: 'success'
 }

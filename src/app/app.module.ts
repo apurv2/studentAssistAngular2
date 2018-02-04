@@ -44,7 +44,14 @@ import { environment } from 'environments/environment';
 import { SubscribeNotificationsModal } from 'app/notifications/notifications.subscribe.modal';
 import { NotificationSettingsService } from 'app/notifications/notifications.subscribe.modal.service';
 import { NotificationSettingsFilter } from 'app/notifications/subscribe.notifications.filter';
+<<<<<<< HEAD
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+=======
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { PostAccommodationService } from 'app/accommodation/post/accommodation.post.service';
+import { SuccessOrFailureModal } from 'app/shared/modals/success.or.failure';
+
+>>>>>>> 13264afd9b0ad3fbfb973ae48f3c7581a910e10e
 
 @NgModule({
   imports: [
@@ -66,8 +73,6 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     Ng2CarouselamosModule,
     MatSidenavModule,
     MatListModule
-
-
   ],
   declarations: [
     AppComponent,
@@ -93,7 +98,7 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     SubscribeNotificationsModal,
     LoginModal,
     NotificationSettingsFilter,
-
+    SuccessOrFailureModal
 
   ],
   providers: [UniversitiesService,
@@ -107,6 +112,7 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     MatDialog,
     UserService,
     NotificationSettingsService,
+    PostAccommodationService,
     {
       provide: Http,
       useFactory: httpFactory,
@@ -114,8 +120,13 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     }
 
   ],
+<<<<<<< HEAD
   bootstrap: [AppComponent],
   entryComponents: [SubscribeNotificationsModal, LoginModal]
+=======
+  bootstrap: [AppComponent, TopHeader, LeftNav],
+  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal]
+>>>>>>> 13264afd9b0ad3fbfb973ae48f3c7581a910e10e
 })
 export class AppModule {
 
