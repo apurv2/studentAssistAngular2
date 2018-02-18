@@ -1508,3 +1508,6 @@ ul:not(.browser-default)>li {
     height:300px;
     background:rgba(10, 1, 1, 0);
 }
+.slides-wrapper.items img{
+min-width: 760px;
+}
