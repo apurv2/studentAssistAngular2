@@ -9,6 +9,8 @@ import { SubscribeNotificationsModal } from "app/notifications/notifications.sub
 import { UserInfo } from "app/shared/models/user.info.model";
 import { AddDetailsService } from "app/accommodation/shared/adDetails/accommodation.details.add.service";
 import { environment } from "environments/environment";
+import { Http } from "@angular/http";
+import { CopyLinkModal } from "../modals/copy.link.modal";
 
 
 @Component({
@@ -27,7 +29,8 @@ export class AddDetails {
     constructor(private dialog: MatDialog,
         private userService: UserService,
         private fb: FacebookService,
-        private addDetailService: AddDetailsService) { }
+        private addDetailService: AddDetailsService,
+        private http: Http) { }
     ngOnInit() {
 
 
@@ -49,9 +52,27 @@ export class AddDetails {
     openNotificationSettingsModal() {
 
     }
+    share() {
+        this.selectedAccommodationAdd.branch_key = environment.branchKey;
+        this.selectedAccommodationAdd.channel = 'facebook';
+        this.selectedAccommodationAdd.feature = 'dashboard';
+        this.selectedAccommodationAdd.stage = 'old user';
+        this.selectedAccommodationAdd.bla = 'lol';
 
-    makeLink() {
 
+        var data = {};
+        data['data'] = this.selectedAccommodationAdd;
+        data['branch_key'] = environment.branchKey;
+
+        this.addDetailService.makeLink(environment.branchUrl, data)
+            .subscribe(response => {
+                this.dialog.open(CopyLinkModal, {
+                    data: response.url
+                }).
+                    afterClosed().subscribe(result => {
+                    });
+
+            });
     }
 
     subscribe() {

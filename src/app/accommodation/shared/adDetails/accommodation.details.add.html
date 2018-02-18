@@ -51,21 +51,21 @@
                         </a>
                     </span>
                     <span>
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i aria-hidden="true" class="fa fa-facebook-square"></i>
                         </a>
                     </span>
                     <span>
-                        <a href="#">
+                        <a href="javascript:void(0)" (click)="share()">
                             <i aria-hidden="true" class="fa fa-share-alt-square"></i>
                         </a>
                     </span>
                     <span *ngIf="!(loggedInUserId != null && loggedInUserId == selectedAccommodationAdd?.userId)">
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i aria-hidden="true" class="fa fa-envelope-square"></i>
                         </a>
                     </span>
-                    <span *ngIf="loggedInUserId != null && loggedInUserId == selectedAccommodationAdd.userId">
+                    <span *ngIf="loggedInUserId != null && loggedInUserId == selectedAccommodationAdd?.userId">
                         <a href="javascript:void(0)" (click)="deleteAdd()">
                             <i aria-hidden="true" class="fa fa-trash"></i>
                         </a>
