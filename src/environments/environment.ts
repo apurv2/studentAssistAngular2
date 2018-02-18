@@ -95,5 +95,7 @@ export const environment = {
   success: 'success',
   getUserPosts: 'profile/getUserPosts',
   login: 'Login',
-  logout: 'Logout'
+  logout: 'Logout',
+  deleteAccommodationAdd: 'profile/deleteAccommodationAdd',
+  addId: 'addId'
 }
