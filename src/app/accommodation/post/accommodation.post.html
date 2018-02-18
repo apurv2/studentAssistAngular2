@@ -85,7 +85,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <mat-form-field>
-                                    <input matInput [matDatepicker]="dp3" placeholder="Date available till" [formControl]="dateAvailableTill" disabled required>
+                                    <input matInput [matDatepicker]="dp3" [min]="minDate" [max]="maxDate" placeholder="Date available till" [formControl]="dateAvailableTill"
+                                        disabled required>
                                     <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
                                     <mat-datepicker #dp3 disabled="false"></mat-datepicker>
                                 </mat-form-field>
@@ -105,7 +106,7 @@
                                 <img src="{{photo}}">
                             </div>
                             <div class="form-group col-md-4 col-md-push-4">
-                                <button type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="emailFormControl.invalid || numberFormControl.invalid">Post</button>
+                                <button type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="emailFormControl.invalid || numberFormControl.invalid || dateAvailableTill.invalid">Post</button>
                             </div>
                         </form>
                     </div>

@@ -22,6 +22,8 @@ export class AddDetails {
 
     @Input()
     selectedAccommodationAdd: AccommodationAdd;
+    @Input()
+    enableSubscription: boolean;
 
     items: Array<any> = []
     loggedInUserId: number;
