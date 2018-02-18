@@ -69,6 +69,7 @@ export class PostAccommodation {
         Validators.min(0),
         Validators.max(2000),
     ]);
+    dateAvailableTill = new FormControl(new Date());
 
 
     cloudinaryUrls: string[] = [];
@@ -173,10 +174,12 @@ export class PostAccommodation {
     }
 
     submit() {
-        this.userService.getLoginStatus()
-            .flatMap(status => status ? this.postAccommodation() : this.openLoginDialog())
-            .filter(response => response.response)
-            .subscribe(e => this.handlePostAccommodationResponse(e));
+
+        console.log('hi'+this.dateAvailableTill);
+        // this.userService.getLoginStatus()
+        //     .flatMap(status => status ? this.postAccommodation() : this.openLoginDialog())
+        //     .filter(response => response.response)
+        //     .subscribe(e => this.handlePostAccommodationResponse(e));
     }
 
     postAccommodation() {
