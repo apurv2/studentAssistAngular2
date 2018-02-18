@@ -1511,3 +1511,21 @@ ul:not(.browser-default)>li {
 .slides-wrapper.items img{
 min-width: 760px;
 }
+.img_list li
+{
+    display: inline;
+}
+.img_list img
+{
+    width: 15%;
+    border-radius: 10%; 
+    margin: 10px;
+    border: 2px solid #cccccc;
+
+}
+.tickmark
+{
+    color: #66cda3;
+    font-size:24px;
+    float: right;
+}

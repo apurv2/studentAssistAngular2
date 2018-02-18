@@ -6,6 +6,7 @@
         <div class="collapsible-header">
           <img class="univCardImg" src="{{university.urls}}" />
           <h4 class="univhead">{{university.universityName}}</h4>
+          
         </div>
         <div class="collapsible-body height-400 overflow-auto">
           <div *ngFor="let accommodationAdd of university?.accommodationAdds">
@@ -17,6 +18,8 @@
                 <div class="media-body panel-body">
                   <h4 class="media-heading">
                     <b>{{accommodationAdd.apartmentName}}</b>
+                    <span class="tickmark">&#10004;</span>
+                    <!-- <span class="tickmark">&#10003;</span> -->
                   </h4>
                   <div class="text-muted small">
                     <b>10 miles from UTA</b>
