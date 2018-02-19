@@ -101,10 +101,11 @@
                                 <label>Add Image</label>
                                 <input #data type="file" multiple=true (change)="addFile(data)">
                             </div>
-
-                            <div *ngFor="let photo of photos">
-                                <img src="{{photo}}">
-                            </div>
+                            <ul class="img_list">
+                                <li *ngFor="let photo of photos">
+                                    <img src="{{photo}}">
+                                </li>
+                            </ul>
                             <div class="form-group col-md-4 col-md-push-4">
                                 <button type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="emailFormControl.invalid || numberFormControl.invalid || dateAvailableTill.invalid">Post</button>
                             </div>
