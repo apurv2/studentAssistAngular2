@@ -1527,6 +1527,10 @@ min-width: 760px;
 .tickmark
 {
     color: #66cda3;
-    font-size:24px;
+    font-size:16px;
     float: right;
+}
+.accommodation_popup
+{
+    width: 780px;
 }
