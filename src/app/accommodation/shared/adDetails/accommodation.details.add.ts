@@ -11,6 +11,7 @@ import { AddDetailsService } from "app/accommodation/shared/adDetails/accommodat
 import { environment } from "environments/environment";
 import { Http } from "@angular/http";
 import { CopyLinkModal } from "../modals/copy.link.modal";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -32,15 +33,26 @@ export class AddDetails {
         private userService: UserService,
         private fb: FacebookService,
         private addDetailService: AddDetailsService,
+        private route: ActivatedRoute,
         private http: Http) { }
     ngOnInit() {
-
 
         this.items = [
             { name: 'http://i.telegraph.co.uk/multimedia/archive/01722/cambridge_universi_1722980b.jpg' },
             { name: 'https://www.thecompleteuniversityguide.co.uk/imagecache/file/width/650/media/3321537/lboro2.jpg' },
         ]
         this.getUserId();
+
+        this.route
+            .queryParams
+            .filter(params => params['addId'] > 0)
+            // .flatMap()
+            .subscribe(params => {
+
+                console.log(params);
+
+            });
+
     }
 
     getUserId() {
@@ -51,9 +63,6 @@ export class AddDetails {
             subscribe((userInfo: UserInfo) => this.loggedInUserId = userInfo.userId);
     }
 
-    openNotificationSettingsModal() {
-
-    }
     share() {
         this.selectedAccommodationAdd.branch_key = environment.branchKey;
         this.selectedAccommodationAdd.channel = 'facebook';
@@ -104,6 +113,5 @@ export class AddDetails {
             + this.selectedAccommodationAdd.addId;
 
         this.addDetailService.deleteAdd(url).subscribe(res => console.log(res));
-
     }
 }

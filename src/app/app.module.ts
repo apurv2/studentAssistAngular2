@@ -129,7 +129,7 @@ import { CopyLinkModal } from './accommodation/shared/modals/copy.link.modal';
 
   ],
   bootstrap: [AppComponent, TopHeader],
-  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal, AddDetailsModal,CopyLinkModal]
+  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal, AddDetailsModal, CopyLinkModal]
 })
 export class AppModule {
 
@@ -142,5 +142,7 @@ export class AppModule {
     };
 
     fb.init(initParams);
+
   }
 }
+
