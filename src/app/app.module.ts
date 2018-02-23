@@ -53,11 +53,16 @@ import { UserPostsService } from 'app/accommodation/post/userPosts/user.posts.se
 import { AddDetailsModal } from 'app/accommodation/shared/adDetails/accommodation.details.modal';
 import { AddDetailsService } from 'app/accommodation/shared/adDetails/accommodation.details.add.service';
 import { CopyLinkModal } from './accommodation/shared/modals/copy.link.modal';
+import { NewApartmentModal } from './accommodation/post/newApartment/new.apartment.modal';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  imports: [
+  imports: [AgmCoreModule.forRoot({
+    apiKey: "AIzaSyAVW7umN-Y1GC69fOsqQlCfjus6hW1Ux84",
+    libraries: ["places"]
+  }),
     BrowserModule,
-    FacebookModule.forRoot(),
+  FacebookModule.forRoot(),
     routing,
     HttpModule,
     FormsModule,
@@ -104,8 +109,8 @@ import { CopyLinkModal } from './accommodation/shared/modals/copy.link.modal';
     SuccessOrFailureModal,
     AddDetailsModal,
     TopHeader,
-    CopyLinkModal
-
+    CopyLinkModal,
+    NewApartmentModal
   ],
   providers: [UniversitiesService,
     HttpInterceptorService,
@@ -129,7 +134,7 @@ import { CopyLinkModal } from './accommodation/shared/modals/copy.link.modal';
 
   ],
   bootstrap: [AppComponent, TopHeader],
-  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal, AddDetailsModal, CopyLinkModal]
+  entryComponents: [SubscribeNotificationsModal, LoginModal, SuccessOrFailureModal, AddDetailsModal, CopyLinkModal, NewApartmentModal]
 })
 export class AppModule {
 

@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  url: 'http://stud.us-east-1.elasticbeanstalk.com/',
+  url: 'http://localhost:8080/',
   production: false,
   appId: '931333680308184',
   APARTMENT_NAME: "apartmentName",
@@ -99,5 +99,6 @@ export const environment = {
   deleteAccommodationAdd: 'profile/deleteAccommodationAdd',
   addId: 'addId',
   branchUrl: 'https://api.branch.io/v1/url',
-  branchKey: 'key_live_ljvA7ojt1BPcO0zpTFFdEimoqqhfGSXF'
+  branchKey: 'key_live_ljvA7ojt1BPcO0zpTFFdEimoqqhfGSXF',
+  other: 'Other'
 }

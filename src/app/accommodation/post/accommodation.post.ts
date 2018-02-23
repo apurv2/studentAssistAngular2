@@ -18,6 +18,7 @@ import { AccommodationAdd } from 'app/accommodation/shared/models/accommodation.
 import { SuccessOrFailureModal } from 'app/shared/modals/success.or.failure';
 import { University } from 'app/universities/universities.model';
 import { UserService } from 'app/shared/userServices/user.service';
+import { NewApartmentModal } from './newApartment/new.apartment.modal';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -256,6 +257,14 @@ export class PostAccommodation {
             });
 
 
+    }
+
+    apartmentNameClick() {
+
+        this.dialog.open(NewApartmentModal).
+            afterClosed().subscribe(result => {
+                console.log('The dialog was closed');
+            });
     }
 
 
