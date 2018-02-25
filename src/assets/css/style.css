@@ -582,7 +582,7 @@ line-height: 24px;
     width: 100%;
     padding: 15px;
     background: rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 3;
 }
 
 
@@ -601,6 +601,7 @@ line-height: 24px;
 .post-accom-form
 {
     padding: 10px;
+    height: 520px;
 }
 /*tabs*/
 .nav-tabs{
@@ -1393,7 +1394,8 @@ top:15px;
 }
 .user-posts
 {
-   
+   height: 520px;
+   overflow: auto;
 }
 .collapsible-body .card, .adv-card-list .card{
     padding: 5px;
@@ -1518,10 +1520,11 @@ min-width: 760px;
 }
 .img_list img
 {
-    width: 15%;
+    width: 120px;
     border-radius: 10%; 
     margin: 10px;
     border: 2px solid #cccccc;
+    height: 120px;
 
 }
 .tickmark
@@ -1533,4 +1536,35 @@ min-width: 760px;
 .accommodation_popup
 {
     width: 780px;
+}
+.w400
+{
+    width:400px !important;
+}
+.map-form input
+{
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    padding: 10px !important;
+    margin-top: 20px !important;
+    margin-bottom: 0px !important;
+}
+.map-button
+{
+    padding: 4px !important;
+    width: 80px !important;
+    margin-top: 20px !important;
+}
+.map-form span
+{
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+    font-weight: 300;
+    margin-top: 0px;
+    padding-left: 10px;
+}
+.mapwindow
+{
+    padding-bottom: 20px;
 }
