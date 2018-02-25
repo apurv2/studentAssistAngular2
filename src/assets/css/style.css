@@ -445,6 +445,7 @@ line-height: 24px;
 .vertical-card{
     height: 320px;
     transition: all 0.1s;
+    cursor: pointer;
 }
 .no-record{
     padding: 20px;
