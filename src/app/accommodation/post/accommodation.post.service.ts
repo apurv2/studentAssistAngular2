@@ -16,4 +16,9 @@ export class PostAccommodationService {
             .map(res => res.json());
     }
 
+    addApartment(url, params) {
+        return this.http.put(url, params)
+            .map(res => res.json());
+    }
+
 }

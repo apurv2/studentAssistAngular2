@@ -100,5 +100,6 @@ export const environment = {
   addId: 'addId',
   branchUrl: 'https://api.branch.io/v1/url',
   branchKey: 'key_live_ljvA7ojt1BPcO0zpTFFdEimoqqhfGSXF',
-  other: 'Other'
+  other: 'Other',
+  addNewApartment: 'addNewApartment'
 }

@@ -261,9 +261,21 @@ export class PostAccommodation {
 
     apartmentNameClick() {
 
-        this.dialog.open(NewApartmentModal).
-            afterClosed().subscribe(result => {
-                console.log('The dialog was closed');
+        let apartmentInfo: Apartment = new Apartment();
+        apartmentInfo.universityId = +this.universityNameSpinnerSelectedItem.code;
+        apartmentInfo.universityName = this.universityNameSpinnerSelectedItem.description;
+        apartmentInfo.apartmentTypeDescription = this.aptTypeSpinnerSelectedItem.description;
+        apartmentInfo.apartmentType = this.aptTypeSpinnerSelectedItem.code;
+
+        this.dialog.open(NewApartmentModal, {
+            data: apartmentInfo
+        }).
+            afterClosed()
+            .flatMap((apartmentInfo: Apartment) => this.postAccommodationService.addApartment(environment.addNewApartment, apartmentInfo))
+            .subscribe(result => {
+
+                console.log(result);
+
             });
     }
 
