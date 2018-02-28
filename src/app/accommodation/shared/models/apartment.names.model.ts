@@ -1,4 +1,5 @@
 export class Apartment {
+    street_num: number;
     apartmentTypeDescription: string;
     apartmentName: string;
     apartmentId: number;

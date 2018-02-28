@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { MapsAPILoader } from '@agm/core';
 import { } from '@types/googlemaps';
 import { FormControl } from '@angular/forms';
-import { Apartment } from '../../shared/models/apartment.model';
+import { Apartment } from '../../shared/models/apartment.names.model';
 
 
 @Component({
@@ -79,7 +79,7 @@ export class NewApartmentModal {
 
 
                     let apartmentItem = {
-                        street_number: 'apartmentName',
+                        street_number: 'street_num',
                         route: 'addr_line',
                         locality: 'city',
                         administrative_area_level_1: 'state',
@@ -108,7 +108,8 @@ export class NewApartmentModal {
         }
     }
 
-    closeDialog(apartmentDetails: Apartment): void {
-        this.dialogRef.close(apartmentDetails);
+    closeDialog(): void {
+        this.apartment.addr_line = this.apartment.street_num + " " + this.apartment.addr_line
+        this.dialogRef.close(this.apartment);
     }
 }
