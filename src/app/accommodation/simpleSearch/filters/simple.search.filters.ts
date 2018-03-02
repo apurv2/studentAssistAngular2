@@ -89,7 +89,6 @@ export class SimpleSearchAddsFilters {
         }
         else {
             this.sharedDataService.openSnackBar(this.snackBar, "No Universities selected", "Dismiss");
-
         }
     }
     

@@ -8,7 +8,7 @@ import { SimpleSearchFilterService } from '../simpleSearch/filters/simple.search
 import { environment } from '../../../environments/environment';
 import { AccommodationSearchModel } from '../shared/models/accommodation.filter.model';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher, MatDialog } from '@angular/material';
+import { ErrorStateMatcher, MatDialog, MatSnackBar } from '@angular/material';
 import { LoginModal } from 'app/shared/modals/login.modal';
 import { CloudinaryUploader } from 'ng2-cloudinary/dist/esm/src/cloudinary-uploader.service';
 import { CloudinaryOptions } from 'ng2-cloudinary/dist/esm/src/cloudinary-options.class';
@@ -74,15 +74,15 @@ export class PostAccommodation {
         Validators.max(2000),
     ]);
     dateAvailableTill = new FormControl(new Date());
-
-
     cloudinaryUrls: string[] = [];
+    showAddApartment: boolean = true;
 
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
         private dialog: MatDialog,
         private userService: UserService,
-        private postAccommodationService: PostAccommodationService) { }
+        private postAccommodationService: PostAccommodationService,
+        private snackBar: MatSnackBar) { }
 
     ngOnInit() {
 
@@ -104,7 +104,10 @@ export class PostAccommodation {
         this.aptTypeSpinnerSelectedItem = Object.assign([], this.aptTypeSpinnerValues[0]);
         this.genderSpinnerSelectedItem = Object.assign([], this.genderSpinnerValues[0]);
 
-        this.initializtApartmentNames();
+        let universities: University[] = this.sharedDataService.getUserSelectedUniversitiesList();
+        if (universities) {
+            this.initializtApartmentNames(universities).subscribe();
+        }
         this.initializeUniversityNames();
     }
 
@@ -112,29 +115,18 @@ export class PostAccommodation {
 
         this.selectedUniversities = this.sharedDataService.getUserSelectedUniversitiesList() != null ?
             this.sharedDataService.getUserSelectedUniversitiesList() : new Array<University>();
-
         this.mapUniversityNames(this.selectedUniversities);
     }
-    initializtApartmentNames() {
-
-        let universities: University[] = this.sharedDataService.getUserSelectedUniversitiesList();
+    initializtApartmentNames(universities: University[], apartmentId?: number) {
         let filterData: AccommodationSearchModel = new AccommodationSearchModel();
-        let universityIds: number[] = new Array<number>();
+        filterData.universityIds = universities.map(university => university.universityId);
+        return this.simpleSearchFilterService.getApartmentNames(filterData)
+            .map(apartmentNames => this.mapApartmentNames(apartmentNames, apartmentId))
 
-        if (universities != null) {
-            for (let university of universities) {
-                universityIds.push(university.universityId);
-            }
-
-            filterData.universityIds = universityIds;
-            this.simpleSearchFilterService.getApartmentNames(filterData).
-                subscribe(apartmentNames => this.mapApartmentNames(apartmentNames));
-        }
     }
-
-    mapApartmentNames(apartments: Apartment[]) {
+    mapApartmentNames(apartments: Apartment[], apartmentId?: number) {
         this.allApartments = apartments;
-        this.populateApartmentNameSpinner();
+        this.populateApartmentNameSpinner(apartmentId);
     }
 
     mapUniversityNames(selectedUniversities: University[]) {
@@ -155,7 +147,7 @@ export class PostAccommodation {
         this.populateApartmentNameSpinner();
     }
 
-    populateApartmentNameSpinner() {
+    populateApartmentNameSpinner(apartmentId?: number) {
 
         let universityId = this.universityNameSpinnerSelectedItem.code;
         let apartmentType = this.aptTypeSpinnerSelectedItem.code;
@@ -170,7 +162,8 @@ export class PostAccommodation {
                         'code': apartment.apartmentId + "",
                         'description': apartment.apartmentName
                     });
-                    this.aptNameSpinnerSelectedItem = Object.assign([], this.aptNameSpinnerValues[0]);
+                    this.aptNameSpinnerSelectedItem = apartmentId > 0 ? Object.assign([], this.aptNameSpinnerValues.filter(apt => +apt.code == apartmentId)[0]) :
+                        this.aptNameSpinnerSelectedItem = Object.assign([], this.aptNameSpinnerValues[0]);
                 }
             }
         }
@@ -180,7 +173,7 @@ export class PostAccommodation {
         this.userService.getLoginStatus()
             .flatMap(status => status ? this.postAccommodation() : this.openLoginDialog())
             .filter(response => response.response)
-            .subscribe(e => this.handlePostAccommodationResponse(e));
+            .subscribe(e => this.sharedDataService.openSuccessFailureDialog(e, this.dialog));
     }
 
     postAccommodation() {
@@ -245,17 +238,6 @@ export class PostAccommodation {
     }
 
     handlePostAccommodationResponse(response) {
-        let data: any = {};
-        data.message = response.response === environment.success ? "success" : "failure";
-        data.response = response.response;
-
-        this.dialog.open(SuccessOrFailureModal, {
-            data: data
-        }).
-            afterClosed().subscribe(result => {
-                console.log('The dialog was closed');
-            });
-
 
     }
 
@@ -267,17 +249,17 @@ export class PostAccommodation {
         apartmentInfo.apartmentTypeDescription = this.aptTypeSpinnerSelectedItem.description;
         apartmentInfo.apartmentType = this.aptTypeSpinnerSelectedItem.code;
 
-        this.dialog.open(NewApartmentModal, {
-            data: apartmentInfo
-        }).
-            afterClosed()
+        this.dialog.open(NewApartmentModal, { data: apartmentInfo })
+            .afterClosed()
             .flatMap((apartmentInfo: Apartment) => this.postAccommodationService.addApartment(environment.addNewApartment, apartmentInfo))
-            .subscribe(result => {
+            .filter(response => parseInt(response) > 0)
+            .flatMap(apartmentId => this.initializtApartmentNames(this.sharedDataService.getUserSelectedUniversitiesList(), +apartmentId))
+            .subscribe((data => {
+                this.showAddApartment = false;
+                this.sharedDataService
+                    .openSnackBar(this.snackBar, "Apartment Added Successfully", "Dismiss");
+            }),
+                err => this.sharedDataService.openSuccessFailureDialog("", this.dialog));
 
-                console.log(result);
-
-            });
     }
-
-
 }
