@@ -55,6 +55,7 @@ export class PostAccommodation {
     cost: number;
     notes: string;
     email: string;
+    toolTipPosition: string = "right";
 
     minDate: Date = new Date();
     maxDate: Date = new Date();
@@ -76,6 +77,7 @@ export class PostAccommodation {
     dateAvailableTill = new FormControl(new Date());
     cloudinaryUrls: string[] = [];
     showAddApartment: boolean = true;
+    apartmentTooltipText: string;
 
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
@@ -88,6 +90,7 @@ export class PostAccommodation {
 
         this.initializeSpinners();
         this.maxDate.setMonth(new Date().getMonth() + 1);
+        this.apartmentTooltipText = environment.apartmentTooltipText;
     }
 
     initializeSpinners() {
@@ -253,13 +256,13 @@ export class PostAccommodation {
             .afterClosed()
             .flatMap((apartmentInfo: Apartment) => this.postAccommodationService.addApartment(environment.addNewApartment, apartmentInfo))
             .filter(response => parseInt(response) > 0)
-            .flatMap(apartmentId => this.initializtApartmentNames(this.sharedDataService.getUserSelectedUniversitiesList(), +apartmentId))
-            .subscribe((data => {
-                this.showAddApartment = false;
-                this.sharedDataService
-                    .openSnackBar(this.snackBar, "Apartment Added Successfully", "Dismiss");
+            .switchMap(apartmentId => this.initializtApartmentNames(this.sharedDataService.getUserSelectedUniversitiesList(), +apartmentId))
+            .subscribe(() => {
+                this.showAddApartment = false
+                this.apartmentTooltipText = environment.apartmentAlreadyAdded;
+                this.sharedDataService.openSnackBar(this.snackBar, environment.apartmentSuccess, "Dismiss");
             }),
-                err => this.sharedDataService.openSuccessFailureDialog("", this.dialog));
+            err => this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
 
     }
 }

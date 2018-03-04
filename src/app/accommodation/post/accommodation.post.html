@@ -111,8 +111,10 @@
                                 <button type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="numberFormControl.invalid || dateAvailableTill.invalid">Post</button>
                             </div>
 
-                            <div *ngIf="showAddApartment" class="form-group col-md-4 col-md-push-4">
-                                <button class="btn primary-btn btn-lg btn-block" (click)="apartmentNameClick()">Add Apartment</button>
+                            <div class="form-group col-md-4 col-md-push-4">
+                                <div matTooltip="{{apartmentTooltipText}}" [matTooltipPosition]="toolTipPosition">
+                                    <button class="btn primary-btn btn-lg btn-block" [disabled]="!showAddApartment" (click)="apartmentNameClick()">Add Apartment</button>
+                                </div>
                             </div>
 
                         </form>
