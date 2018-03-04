@@ -68,8 +68,8 @@ export class AddDetails {
         this.selectedAccommodationAdd.channel = 'facebook';
         this.selectedAccommodationAdd.feature = 'dashboard';
         this.selectedAccommodationAdd.stage = 'old user';
-        this.selectedAccommodationAdd.bla = 'lol';
 
+        this.selectedAccommodationAdd.addPhotoIds
 
         var data = {};
         data['data'] = this.selectedAccommodationAdd;

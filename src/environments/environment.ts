@@ -107,5 +107,6 @@ export const environment = {
   apartmentSuccess: "Apartment Added Successfully",
   getSimpleSearchAddsPagination: 'getSimpleSearchAddsPagination',
   landingTooltipText:'Click to launch Search',
-  landingEmptyTooltipText:'Add Universities To Search'
+  landingEmptyTooltipText:'Add Universities To Search',
+  nonNativeURLs : ['cloudinary','branch']
 }
