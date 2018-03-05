@@ -26,8 +26,8 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <mat-form-field>
-                                    <mat-select placeholder="Apartment Name" [(ngModel)]="aptNameSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)"
-                                        [ngModelOptions]="{standalone: true}" required>
+                                    <mat-select placeholder="Apartment Name" [(ngModel)]="aptNameSpinnerSelectedItem.code" [ngModelOptions]="{standalone: true}"
+                                        required>
                                         <mat-option *ngFor="let spinnerValue of aptNameSpinnerValues" [value]="spinnerValue?.code">{{spinnerValue.description}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>

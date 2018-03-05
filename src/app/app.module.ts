@@ -56,6 +56,7 @@ import { CopyLinkModal } from './accommodation/shared/modals/copy.link.modal';
 import { NewApartmentModal } from './accommodation/post/newApartment/new.apartment.modal';
 import { AgmCoreModule } from '@agm/core';
 import { CarouselComponent } from './shared/carousel/carousel.component';
+import { AdsListService } from './accommodation/shared/adsList/ads.list.service';
 
 @NgModule({
   imports: [AgmCoreModule.forRoot({
@@ -131,6 +132,7 @@ import { CarouselComponent } from './shared/carousel/carousel.component';
     PostAccommodationService,
     UserPostsService,
     AddDetailsService,
+    AdsListService,
     {
       provide: Http,
       useFactory: httpFactory,

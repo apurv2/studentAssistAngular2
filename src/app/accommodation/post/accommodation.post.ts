@@ -56,6 +56,7 @@ export class PostAccommodation {
     notes: string;
     email: string;
     toolTipPosition: string = "right";
+    loading: boolean;
 
     minDate: Date = new Date();
     maxDate: Date = new Date();
@@ -74,7 +75,7 @@ export class PostAccommodation {
         Validators.min(0),
         Validators.max(2000),
     ]);
-    dateAvailableTill = new FormControl(new Date());
+    dateAvailableTill: FormControl;
     cloudinaryUrls: string[] = [];
     showAddApartment: boolean = true;
     apartmentTooltipText: string;
@@ -84,13 +85,20 @@ export class PostAccommodation {
         private dialog: MatDialog,
         private userService: UserService,
         private postAccommodationService: PostAccommodationService,
-        private snackBar: MatSnackBar) { }
+        private snackBar: MatSnackBar,
+        private router: Router) { }
 
     ngOnInit() {
 
         this.initializeSpinners();
         this.maxDate.setMonth(new Date().getMonth() + 1);
         this.apartmentTooltipText = environment.apartmentTooltipText;
+
+        let future30DaysDate: Date = new Date();
+        future30DaysDate.setMonth(new Date().getMonth() + 1);
+        future30DaysDate.setHours(0,0,0,0);
+        this.dateAvailableTill = new FormControl(future30DaysDate.toISOString());
+
     }
 
     initializeSpinners() {
@@ -173,10 +181,17 @@ export class PostAccommodation {
     }
 
     submit() {
+        this.loading = true;
         this.userService.getLoginStatus()
             .flatMap(status => status ? this.postAccommodation() : this.openLoginDialog())
             .filter(response => response.response)
-            .subscribe(e => this.sharedDataService.openSuccessFailureDialog(e, this.dialog));
+            .subscribe(e => {
+                this.sharedDataService.openSuccessFailureDialog(e, this.dialog);
+                this.loading = false;
+            }, err => {
+                this.loading = false;
+                this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
+            });
     }
 
     postAccommodation() {
@@ -221,6 +236,7 @@ export class PostAccommodation {
     postAccommodationAdd(photoUrls: string[]): Observable<any> {
         let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams();
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
+
         return this.postAccommodationService
             .postAccommodation(environment.createAccommodationAdd, accommodationAdd);
     }
@@ -236,6 +252,8 @@ export class PostAccommodation {
         accommodationAdd.emailId = this.email;
         accommodationAdd.noOfRooms = this.noOfRoomsSpinnerSelectedItem.code;
         accommodationAdd.postedTill = this.dateAvailableTill.value;
+
+
         accommodationAdd.apartmentId = +this.aptNameSpinnerSelectedItem.code;
         return accommodationAdd;
     }
@@ -254,6 +272,7 @@ export class PostAccommodation {
 
         this.dialog.open(NewApartmentModal, { data: apartmentInfo })
             .afterClosed()
+            .filter((apartmentInfo: Apartment) => apartmentInfo != null)
             .flatMap((apartmentInfo: Apartment) => this.postAccommodationService.addApartment(environment.addNewApartment, apartmentInfo))
             .filter(response => parseInt(response) > 0)
             .switchMap(apartmentId => this.initializtApartmentNames(this.sharedDataService.getUserSelectedUniversitiesList(), +apartmentId))
@@ -261,8 +280,11 @@ export class PostAccommodation {
                 this.showAddApartment = false
                 this.apartmentTooltipText = environment.apartmentAlreadyAdded;
                 this.sharedDataService.openSnackBar(this.snackBar, environment.apartmentSuccess, "Dismiss");
-            }),
-            err => this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
+            },
+                err => {
+                    this.loading = false;
+                    this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
+                });
 
     }
 }

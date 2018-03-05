@@ -805,7 +805,7 @@ line-height: 24px;
     top: 0;
     bottom: 0;
     z-index: 4;
-    display: none;
+    /* display: none; */
 }
 .card-group{
     background: #fff;
@@ -1549,14 +1549,6 @@ min-width: 760px;
 {
     width:400px !important;
 }
-.map-form input
-{
-    background: #fff !important;
-    border: 1px solid #ccc !important;
-    padding: 10px !important;
-    margin-top: 20px !important;
-    margin-bottom: 0px !important;
-}
 .map-button
 {
     padding: 4px !important;
@@ -1675,4 +1667,16 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     color: gray;
     cursor: not-allowed;
     text-decoration: underline;
+}
+*::-webkit-scrollbar {
+	width: 6px !important;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0);
+}
+
+Pseudo ::scrollbar-track element
+*::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, .08);
 }
