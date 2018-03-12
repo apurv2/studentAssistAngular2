@@ -1003,9 +1003,25 @@ input.mat-chip-input {
 {
     display: block !important;
 }
+.map-form .mat-form-field-infix
+{
+    width: 240px !important;
+}
+.map-form .mat-form-field-infix
+{
+    display: block !important;
+}
+.map-form .mat-form-field-infix
+{
+    margin-bottom: 0px;
+}
 .signin-form .form-group
 {
     margin-bottom: 0px;
+}
+.search-form .mat-form-field-wrapper
+{
+    padding-bottom: 0 !important;
 }
 
 .mat-dialog-container
@@ -1038,7 +1054,7 @@ input.mat-chip-input {
     font-weight: 300;
     font-size: 28px;
   }
-  
+  /*
   input[type="text"],
   input[type="password"] {
     display: block;
@@ -1053,7 +1069,18 @@ input.mat-chip-input {
     font-size: 15px;
     transition: 0.2s ease;
   }
-  
+  */
+  .map-form input[type="text"],.form-group input[type="email"],.form-group input[type="password"]{
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: 0;
+    height: 24px;
+    box-shadow: none;
+}
+.mat-form-field-invalid .mat-form-field-label
+{
+    color:#7c818e !important;
+}
   
   
  
@@ -1549,11 +1576,10 @@ min-width: 760px;
 {
     width:400px !important;
 }
-.map-button
-{
+.map-button {
     padding: 4px !important;
     width: 80px !important;
-    margin-top: 20px !important;
+    margin-top: 0px !important;
 }
 .map-form span
 {
