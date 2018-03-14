@@ -154,6 +154,7 @@ export class AppModule {
     };
 
     fb.init(initParams);
+    fb.api
 
   }
 }
