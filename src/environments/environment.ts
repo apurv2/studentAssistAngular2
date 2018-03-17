@@ -111,5 +111,6 @@ export const environment = {
   nonNativeURLs: ['cloudinary', 'branch'],
   setUserVisitedAdds: 'profile/setUserVisitedAdds',
   me: 'me',
-  getAdminUserIds: 'profile/supUser'
+  getAdminUserIds: 'profile/supUser',
+  createAccommodationAddFromFacebook: 'profile/createAccommodationAddFromFacebook',
 }

@@ -249,8 +249,9 @@ export class PostAccommodation {
         let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams();
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
 
+        let url = this.adminUser ? environment.createAccommodationAddFromFacebook : environment.createAccommodationAdd;
         return this.postAccommodationService
-            .postAccommodation(environment.createAccommodationAdd, accommodationAdd);
+            .postAccommodation(url, accommodationAdd);
     }
 
     private preparePostAccommodationParams(): AccommodationAdd {
