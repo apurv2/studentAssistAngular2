@@ -24,7 +24,7 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-5">
                                 <mat-form-field>
                                     <mat-select placeholder="Apartment Name" [(ngModel)]="aptNameSpinnerSelectedItem.code" [ngModelOptions]="{standalone: true}"
                                         required>
@@ -32,6 +32,12 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
+                            <div class="form-group col-md-1 addbtn">
+                                    <button class="btn" [disabled]="!showAddApartment" (click)="apartmentNameClick()">
+                                <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                           
                             <div class="form-group col-md-6">
                                 <mat-form-field>
                                     <mat-select placeholder="Gender" [(ngModel)]="genderSpinnerSelectedItem.code" (ngModelChange)="spinnerClick1($event)" [ngModelOptions]="{standalone: true}"
@@ -107,16 +113,16 @@
                                     <img src="{{photo}}">
                                 </li>
                             </ul>
-                            <div class="form-group col-md-4 col-md-push-4">
+                            <div class="form-group col-md-4 col-md-push-8">
                                 <mat-spinner [diameter]="40" *ngIf="loading"></mat-spinner>
-                                <button *ngIf="!loading" type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="numberFormControl.invalid || dateAvailableTill.invalid">Post</button>
+                                <button *ngIf="!loading" type="submit" class="btn primary-btn btn-lg btn-block" (click)="submit()" [disabled]="numberFormControl.invalid || dateAvailableTill.invalid">Save post</button>
                             </div>
 
-                            <div class="form-group col-md-4 col-md-push-4">
+                            <!-- <div class="form-group col-md-4 col-md-push-4">
                                 <div *ngIf="!loading" matTooltip="{{apartmentTooltipText}}" [matTooltipPosition]="toolTipPosition">
                                     <button class="btn primary-btn btn-lg btn-block" [disabled]="!showAddApartment" (click)="apartmentNameClick()">Add Apartment</button>
                                 </div>
-                            </div>
+                            </div> -->
 
                         </form>
                     </div>

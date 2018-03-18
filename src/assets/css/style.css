@@ -173,6 +173,9 @@ a{
 .detail-card{
     margin-top:10px; 
 }
+.accommodation_popup .detail-card{
+    margin-top:0px; 
+}
 .image-container
 {
     height: 320px;
@@ -347,11 +350,99 @@ line-height: 24px;
     border: 0;
     box-shadow: 0 3px 6px rgba(0,0,0,.1);
 }
-.useraccount .btn{
-    padding: 0;
-    background: transparent !important;
-    box-shadow:  0 0 0 transparent !important;
+.failure-popup
+{
+    background: #FFF;
+    width: 420px;
+    text-align: center;
+    padding: 2em;
     border: 0;
+    border-top: 5px solid #fb6362;;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+.failure-popup i
+{
+    padding: 10px;
+    color:  #fb6362;
+    position: relative;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 30px;
+}
+.sucess-popup
+{
+    background: #FFF;
+    width: 420px;
+    text-align: center;
+    padding: 2em;
+    border: 0;
+    border-top: 5px solid lightgreen;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+.sucess-popup i
+{
+    background-color: lightgreen;
+    border-radius: 50%;
+    padding: 10px;
+    color: #fff;
+    position: relative;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.sucess-popup p, .failure-popup p
+{
+    font-style: italic;
+
+}
+.sucess-popup span, .failure-popup span
+{
+    font-size: 18px;
+    font-weight: 200;
+    display: inherit;
+    text-transform: initial;
+    margin-bottom: 20px;
+}
+.sucess-popup button,  .failure-popup button
+{
+    width: 85px;
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    padding: 5px !important;
+}
+.addbtn .btn{
+    display: inline-block;
+    color: #fff; 
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 36px;
+    height: 36px;
+    line-height: 10px;
+    padding: 0;
+    background-color: #fb6362; 
+    border-radius: 50%;
+    transition: .3s;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-left: -20px;
+    margin-top: 10px;
+}
+.useraccount .btn{
+    display: inline-block;
+    color: #fff; 
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 45px;
+    height: 45px;
+    line-height: 10px;
+    padding: 0;
+    background-color: #fb6362; 
+    border-radius: 50%;
+    transition: .3s;
+    cursor: pointer;
+    vertical-align: middle;
 }
 .useraccount .dropdown-menu li a{
     padding: 8px 24px;
@@ -455,12 +546,12 @@ line-height: 24px;
     cursor: pointer;
 }
 .no-record{
-    padding: 20px;
-    background: #fff;
+    padding: 120px;
     text-align: center;
     font-weight: 800;
-    margin: 0px 5px;
-    display: none;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 .card{
     background: #fff;
@@ -1225,6 +1316,7 @@ top:15px;
         float: left;
         width: 50%;
     }
+    
 }
 @media (min-width:320px) and (max-width:480px){
     .menu.useraccount{
@@ -1339,6 +1431,10 @@ top:15px;
     .signin-form
     {
         padding: 0px;
+    }
+    .detail-card
+    {
+        display: none;
     }
 }
 @media (max-width:980px){
@@ -1491,9 +1587,9 @@ top:15px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 1rem;
-    background-color: rgba(0, 0, 7, 0.3);
-    background: rgba(0, 0, 7, 0.5);
-    color: rgba(0, 0, 7, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.8);
     margin-top: 6px;
 }
 .collapsible-body {
@@ -1614,6 +1710,14 @@ min-width: 760px;
 {
     color: #fb6362;
 }
+.mat-progress-spinner
+{
+    margin-left: 45%;
+}
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #fb6362 !important;
+    stroke-width: 6% !important;
+}
 .mat-progress-bar-fill::after, .mat-spinner circle
 {
     background-color: #fb6362 !important;
@@ -1634,6 +1738,11 @@ border-radius: 100%;
 padding: 10px;
 margin: 2px;
 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.slider-prev-next-control
+{
+    top: 25% !important;
+    opacity: 1;
 }
 @-moz-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {
