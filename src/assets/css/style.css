@@ -1257,6 +1257,15 @@ input.mat-chip-input {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #fb6362 !important;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: #fb6362 !important;
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #fb6362 !important;
+}
   .mat-radio-button,.mat-checkbox, b {
     font-family: 'Josefin Sans', sans-serif !important;
 }
@@ -1267,6 +1276,20 @@ input.mat-chip-input {
 label
 {
     font-weight: 400 !important;
+}
+.rightarrow
+{
+    float: right;
+    margin: 30px;
+}
+.rightarrow i
+{
+    border-radius: 50%;
+    padding: 10px;
+    background-color:#fb6362;
+    color:#fff;
+    margin-bottom: 20px;
+
 }
 .subscription .card
 {
