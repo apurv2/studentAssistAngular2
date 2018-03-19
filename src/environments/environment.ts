@@ -109,5 +109,9 @@ export const environment = {
   landingTooltipText: 'Click to launch Search',
   landingEmptyTooltipText: 'Add Universities To Search',
   nonNativeURLs: ['cloudinary', 'branch'],
-  setUserVisitedAdds: 'profile/setUserVisitedAdds'
+  setUserVisitedAdds: 'profile/setUserVisitedAdds',
+  me: 'me',
+  getAdminUserIds: 'profile/supUser',
+  createAccommodationAddFromFacebook: 'profile/createAccommodationAddFromFacebook',
+  getAccommodationFromAddId: 'getAccommodationFromAddId'
 }

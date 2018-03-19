@@ -19,6 +19,7 @@ import { SuccessOrFailureModal } from 'app/shared/modals/success.or.failure';
 import { University } from 'app/universities/universities.model';
 import { UserService } from 'app/shared/userServices/user.service';
 import { NewApartmentModal } from './newApartment/new.apartment.modal';
+import { UserInfo } from '../../shared/models/user.info.model';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -57,6 +58,8 @@ export class PostAccommodation {
     email: string;
     toolTipPosition: string = "right";
     loading: boolean;
+    adminUser: boolean;
+    name: string;
 
     minDate: Date = new Date();
     maxDate: Date = new Date();
@@ -79,6 +82,7 @@ export class PostAccommodation {
     cloudinaryUrls: string[] = [];
     showAddApartment: boolean = true;
     apartmentTooltipText: string;
+    fbId: string;
 
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
@@ -96,8 +100,9 @@ export class PostAccommodation {
 
         let future30DaysDate: Date = new Date();
         future30DaysDate.setMonth(new Date().getMonth() + 1);
-        future30DaysDate.setHours(0,0,0,0);
         this.dateAvailableTill = new FormControl(future30DaysDate.toISOString());
+
+        this.checkAdminUser();
 
     }
 
@@ -183,19 +188,26 @@ export class PostAccommodation {
     submit() {
         this.loading = true;
         this.userService.getLoginStatus()
-            .flatMap(status => status ? this.postAccommodation() : this.openLoginDialog())
-            .filter(response => response.response)
+            .flatMap(status => status ? this.getUserDetails(this.fbId) : this.openLoginDialog())
+            .map(resp => {
+                if (resp == null) {
+                    throw new Error('Invalid user id');
+                }
+                else return resp;
+            })
+            .flatMap((userInfo: UserInfo) => this.postAccommodation(userInfo))
             .subscribe(e => {
                 this.sharedDataService.openSuccessFailureDialog(e, this.dialog);
                 this.loading = false;
             }, err => {
                 this.loading = false;
+                console.log(err);
                 this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
             });
     }
 
-    postAccommodation() {
-        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null);
+    postAccommodation(userInfo?: UserInfo) {
+        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
     }
 
     openLoginDialog() {
@@ -233,15 +245,16 @@ export class PostAccommodation {
         return formData;
     }
 
-    postAccommodationAdd(photoUrls: string[]): Observable<any> {
-        let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams();
+    postAccommodationAdd(photoUrls?: string[], userInfo?: UserInfo): Observable<any> {
+        let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams(userInfo);
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
 
+        let url = this.adminUser ? environment.createAccommodationAddFromFacebook : environment.createAccommodationAdd;
         return this.postAccommodationService
-            .postAccommodation(environment.createAccommodationAdd, accommodationAdd);
+            .postAccommodation(url, accommodationAdd);
     }
 
-    private preparePostAccommodationParams(): AccommodationAdd {
+    private preparePostAccommodationParams(userInfo?: UserInfo): AccommodationAdd {
 
         let accommodationAdd: AccommodationAdd = new AccommodationAdd();
         accommodationAdd.gender = this.genderSpinnerSelectedItem.code;
@@ -253,6 +266,11 @@ export class PostAccommodation {
         accommodationAdd.noOfRooms = this.noOfRoomsSpinnerSelectedItem.code;
         accommodationAdd.postedTill = this.dateAvailableTill.value;
 
+        if (userInfo != null) {
+            accommodationAdd.firstName = userInfo.firstName;
+            accommodationAdd.lastName = userInfo.lastName;
+            accommodationAdd.userId = userInfo.userId;
+        }
 
         accommodationAdd.apartmentId = +this.aptNameSpinnerSelectedItem.code;
         return accommodationAdd;
@@ -286,5 +304,29 @@ export class PostAccommodation {
                     this.sharedDataService.openSuccessFailureDialog("failure", this.dialog);
                 });
 
+    }
+
+    checkAdminUser() {
+
+        this.getUserDetails()
+            .flatMap(userInfo => this.userService.checkAdmin())
+            .subscribe(data => this.adminUser = data, err => console.log("not looged in"));
+
+    }
+
+    getUserDetails(userId?: string) {
+        return this.userService.getUserInfoFromFb(userId);
+    }
+
+    onFbIdChange() {
+
+        if (+this.fbId > 0) {
+            this.getUserDetails(this.fbId)
+                .subscribe((userInfo: UserInfo) => {
+                    this.name = userInfo.fullName;
+
+                })
+
+        }
     }
 }
