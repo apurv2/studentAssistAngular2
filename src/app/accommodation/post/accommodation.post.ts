@@ -59,6 +59,7 @@ export class PostAccommodation {
     toolTipPosition: string = "right";
     loading: boolean;
     adminUser: boolean;
+    name: string;
 
     minDate: Date = new Date();
     maxDate: Date = new Date();
@@ -99,7 +100,6 @@ export class PostAccommodation {
 
         let future30DaysDate: Date = new Date();
         future30DaysDate.setMonth(new Date().getMonth() + 1);
-        // future30DaysDate.setHours(0, 0, 0, 0);
         this.dateAvailableTill = new FormControl(future30DaysDate.toISOString());
 
         this.checkAdminUser();
@@ -195,7 +195,7 @@ export class PostAccommodation {
                 }
                 else return resp;
             })
-            .flatMap(data => this.postAccommodation())
+            .flatMap((userInfo: UserInfo) => this.postAccommodation(userInfo))
             .subscribe(e => {
                 this.sharedDataService.openSuccessFailureDialog(e, this.dialog);
                 this.loading = false;
@@ -206,8 +206,8 @@ export class PostAccommodation {
             });
     }
 
-    postAccommodation() {
-        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null);
+    postAccommodation(userInfo?: UserInfo) {
+        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
     }
 
     openLoginDialog() {
@@ -245,8 +245,8 @@ export class PostAccommodation {
         return formData;
     }
 
-    postAccommodationAdd(photoUrls: string[]): Observable<any> {
-        let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams();
+    postAccommodationAdd(photoUrls?: string[], userInfo?: UserInfo): Observable<any> {
+        let accommodationAdd: AccommodationAdd = this.preparePostAccommodationParams(userInfo);
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
 
         let url = this.adminUser ? environment.createAccommodationAddFromFacebook : environment.createAccommodationAdd;
@@ -254,7 +254,7 @@ export class PostAccommodation {
             .postAccommodation(url, accommodationAdd);
     }
 
-    private preparePostAccommodationParams(): AccommodationAdd {
+    private preparePostAccommodationParams(userInfo?: UserInfo): AccommodationAdd {
 
         let accommodationAdd: AccommodationAdd = new AccommodationAdd();
         accommodationAdd.gender = this.genderSpinnerSelectedItem.code;
@@ -266,6 +266,11 @@ export class PostAccommodation {
         accommodationAdd.noOfRooms = this.noOfRoomsSpinnerSelectedItem.code;
         accommodationAdd.postedTill = this.dateAvailableTill.value;
 
+        if (userInfo != null) {
+            accommodationAdd.firstName = userInfo.firstName;
+            accommodationAdd.lastName = userInfo.lastName;
+            accommodationAdd.userId = userInfo.userId;
+        }
 
         accommodationAdd.apartmentId = +this.aptNameSpinnerSelectedItem.code;
         return accommodationAdd;
@@ -311,5 +316,17 @@ export class PostAccommodation {
 
     getUserDetails(userId?: string) {
         return this.userService.getUserInfoFromFb(userId);
+    }
+
+    onFbIdChange() {
+
+        if (+this.fbId > 0) {
+            this.getUserDetails(this.fbId)
+                .subscribe((userInfo: UserInfo) => {
+                    this.name = userInfo.fullName;
+
+                })
+
+        }
     }
 }
