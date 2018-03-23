@@ -7,6 +7,7 @@ import { UserService } from "app/shared/userServices/user.service";
 import { environment } from "environments/environment";
 import { LoginModal } from "app/shared/modals/login.modal";
 import { MatDialog } from "@angular/material";
+import { University } from "../../universities/universities.model";
 
 @Component({
     selector: 'top-header',
@@ -14,6 +15,7 @@ import { MatDialog } from "@angular/material";
 })
 
 export class TopHeader {
+
 
     showSideNav: boolean;
     userInfo: UserInfo = null;
@@ -66,7 +68,33 @@ export class TopHeader {
     loginOrLogout() {
         this.userService.getLoginStatus().
             flatMap(status => status ? this.userService.logout() : this.openLoginDialog())
-            .subscribe(loginResponse => this.loginLogout = loginResponse ? environment.logout : environment.login);
+            .subscribe(loginResponse => {
+                this.loginLogout = loginResponse ? environment.logout : environment.login;
+                if (loginResponse) {
+                    this.processLogin();
+                }
+                else {
+                    this.processAfterLogout();
+
+
+                }
+            });
+    }
+
+    processLogin() {
+
+        if (this.sharedDataService.getUserSelectedUniversitiesList.length > 0) {
+            this.userService.createOrUpdateUser()
+                .subscribe();
+        }
+        else {
+            this.userService.getUserUniversities().
+                subscribe(resp => {
+                    this.sharedDataService.processDbUnivChips(resp);
+                    this.closeNav();
+                });
+        }
+
     }
 
     determineLoginSituation() {
@@ -84,6 +112,10 @@ export class TopHeader {
 
     processAfterLogout() {
         this.userInfo = null;
+        localStorage.clear;
+        this.sharedDataService.setUserSelectedUniversitiesList(new Array<University>());
+        this.sharedDataService.emitDbUnivChips(new Array<University>());
+        this.closeNav();
     }
 
     openLoginDialog() {

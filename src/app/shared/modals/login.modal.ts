@@ -35,7 +35,7 @@ export class LoginModal {
 
     processLogin(userInfo) {
         this.sharedDataService.emitLoginStatus(true);
-        this.sharedDataService.emitUserInfo(userInfo)
+        this.sharedDataService.emitUserInfo(userInfo);
         var cookies = document.cookie.split(";");
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i];
