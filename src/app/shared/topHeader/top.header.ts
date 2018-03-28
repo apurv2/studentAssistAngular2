@@ -105,7 +105,7 @@ export class TopHeader {
                 }
                 else {
                     this.loginLogout = environment.login;
-                    this.processAfterLogout();
+                    // this.processAfterLogout();
                 }
             })
     }
@@ -116,6 +116,7 @@ export class TopHeader {
         this.sharedDataService.setUserSelectedUniversitiesList(new Array<University>());
         this.sharedDataService.emitDbUnivChips(new Array<University>());
         this.closeNav();
+        this.router.navigate(['/dashboard/']);
     }
 
     openLoginDialog() {
