@@ -1124,13 +1124,17 @@ input.mat-chip-input {
     position: relative;
     
     width: 450px;
-    height: 225px;
-    background: #FFF;
+    height: 300px;
+   /* background: #FFF;*/
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    border-top: 7px solid #32508E;
+ /*   border-top: 7px solid #32508E;*/
   }
-  
+  #login-box img
+{
+    padding: 0px 10px 30px 20px;
+    margin-left: 25%;
+}
   .left {
     position: absolute;
     top: 0;
@@ -1202,24 +1206,33 @@ input.mat-chip-input {
     border-radius: 0 2px 2px 0;
 }
   */
+  .signup-opt
+  {
+    display: block;
+    margin: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center; 
+  }
  .loginwith {
     display: block;
-    margin-bottom: 40px;
+    margin: 15px;
     font-size: 24px;
+    font-weight: 300;
     text-align: center;
   }
   
   button.social-signin {
     margin-bottom: 20px;
-    width: 260px;
-    height: 52px;
+    width: 200px;
+    height: 40px;
     border: none;
     border-radius: 2px;
     color: #FFF;
     font-weight: 500;
     transition: 0.2s ease;
     cursor: pointer;
-    margin-left: 15%;
+    margin-left: 25%;
 }
 
 
