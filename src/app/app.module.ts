@@ -57,6 +57,8 @@ import { NewApartmentModal } from './accommodation/post/newApartment/new.apartme
 import { AgmCoreModule } from '@agm/core';
 import { CarouselComponent } from './shared/carousel/carousel.component';
 import { AdsListService } from './accommodation/shared/adsList/ads.list.service';
+import { AccommodationNotificationService } from './notifications/accommodation/notifications.accommodation.service';
+import { AccommodationNotifications } from './notifications/accommodation/notifications.accommodation';
 
 @NgModule({
   imports: [AgmCoreModule.forRoot({
@@ -116,7 +118,8 @@ import { AdsListService } from './accommodation/shared/adsList/ads.list.service'
     TopHeader,
     CopyLinkModal,
     NewApartmentModal,
-    CarouselComponent
+    CarouselComponent,
+    AccommodationNotifications
   ],
   providers: [UniversitiesService,
     HttpInterceptorService,
@@ -133,6 +136,7 @@ import { AdsListService } from './accommodation/shared/adsList/ads.list.service'
     UserPostsService,
     AddDetailsService,
     AdsListService,
+    AccommodationNotificationService,
     {
       provide: Http,
       useFactory: httpFactory,

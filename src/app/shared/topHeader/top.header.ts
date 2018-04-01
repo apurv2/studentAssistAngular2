@@ -124,5 +124,11 @@ export class TopHeader {
             afterClosed();
     }
 
+    goToAccommodationNotifications() {
+        this.closeNav();
+        this.router.navigate(['/accommodationNotifications/']);
+    }
+
+
     ngOnDestroy() { this.loginStatusSubscription.unsubscribe(); }
 }    
