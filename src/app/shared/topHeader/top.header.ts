@@ -129,6 +129,10 @@ export class TopHeader {
         this.router.navigate(['/accommodationNotifications/']);
     }
 
+    goToRecentlyViewed() {
+        this.closeNav();
+        this.router.navigate(['/recentlyViewed/']);
+    }
 
     ngOnDestroy() { this.loginStatusSubscription.unsubscribe(); }
 }    

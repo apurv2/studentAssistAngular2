@@ -5,6 +5,7 @@ import { PostAccommodation } from './accommodation/post/accommodation.post';
 import { AdvancedSearch } from './accommodation/advancedSearch/accommodation.advanced.search';
 import { AddDetails } from './accommodation/shared/adDetails/accommodation.details.add';
 import { AccommodationNotifications } from './notifications/accommodation/notifications.accommodation';
+import { RecentlyViewedAccommodations } from './accommodation/recentlyViewed/accommodation.recently.viewed';
 
 const appRoutes: Routes = [
     {
@@ -32,6 +33,10 @@ const appRoutes: Routes = [
     {
         path: 'accommodationNotifications',
         component: AccommodationNotifications
+    },
+    {
+        path: 'recentlyViewed',
+        component: RecentlyViewedAccommodations
     },
     { path: '**', redirectTo: 'dashboard' }
 
