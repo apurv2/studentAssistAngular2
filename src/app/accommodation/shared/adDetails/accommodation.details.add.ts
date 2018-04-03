@@ -28,6 +28,7 @@ export class AddDetails {
 
     items: Array<any> = []
     loggedInUserId: number;
+    deletePrompt: boolean = false;
 
     constructor(private dialog: MatDialog,
         private userService: UserService,
@@ -97,6 +98,10 @@ export class AddDetails {
             afterClosed().subscribe(result => {
             });
 
+    }
+
+    showDeletePrompt() {
+        this.deletePrompt = true;
     }
 
     deleteAdd() {
