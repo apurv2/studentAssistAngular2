@@ -10,6 +10,7 @@ import { Subscription } from "rxjs/Subscription";
 import { LoginResponse } from "ngx-facebook/dist/esm/models/login-response";
 import { UserService } from "app/shared/userServices/user.service";
 import { SimpleSearchAddsFilters } from "./filters/simple.search.filters";
+import { SimpleSearchAddsList } from "./adsList/simple.search.adds.list";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class SimpleSearch {
     accommodationAddSubscription: Subscription;
 
     @ViewChild('filters') filters: SimpleSearchAddsFilters;
-
+    @ViewChild('simpleSearchList') simpleSearchList: SimpleSearchAddsList;
 
     constructor(private simpleSearchService: SimpleSearchService,
         private facebookService: FacebookService,

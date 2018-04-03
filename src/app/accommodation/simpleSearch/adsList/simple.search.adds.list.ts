@@ -28,6 +28,7 @@ export class SimpleSearchAddsList {
     filters: SimpleSearchAddsFilters;
     selectedItemId: number;
     timerObservable: Subscription;
+    showingDetails: boolean = false;
 
 
     constructor(private sharedDataService: SharedDataService,
@@ -52,7 +53,6 @@ export class SimpleSearchAddsList {
     }
 
     addClick(accommodationAdd: AccommodationAdd) {
-
         if (!accommodationAdd.userVisitedSw) {
             this.adsListService.setUserVisitedAdd(accommodationAdd)
                 .subscribe(e => {
@@ -63,6 +63,7 @@ export class SimpleSearchAddsList {
         this.sharedDataService.emitAccommodationAdd(accommodationAdd);
 
         if (window.innerWidth < 767) {
+            this.showingDetails = true;
             document.getElementById("detailCard").style.display = 'block';
             document.getElementById("simpleSearchList").style.display = 'none';
         }
@@ -93,16 +94,11 @@ export class SimpleSearchAddsList {
     @HostListener('window:popstate', ['$event'])
     onPopState(event) {
 
-        event.preventDefault();
-        event.stopPropagation();
-
         if (window.innerWidth < 767) {
             document.getElementById("detailCard").style.display = 'none';
             document.getElementById("simpleSearchList").style.display = 'block';
+            // this.showingDetails = false;
         }
-        console.log('Back button pressed');
-
-        return false;
     }
 
     ngOnDestroy() {
