@@ -25,7 +25,6 @@ export class SimpleSearch {
 
     @ViewChild('filters') filters: SimpleSearchAddsFilters;
 
-
     constructor(private simpleSearchService: SimpleSearchService,
         private facebookService: FacebookService,
         private sharedDataservice: SharedDataService,
@@ -48,12 +47,15 @@ export class SimpleSearch {
             switchMap(filters => this.getSimpleSearchAdds(filters)).
             subscribe(universityAccommodationAdds => {
                 this.universityAccommodationAdds = universityAccommodationAdds;
-                this.filters.stopLoding();
+
+                if (this.universityAccommodationAdds.length == 0) {
+                    this.filters.stopLoding();
+                }
+
             });
     }
 
     getSimpleSearchAdds(filters: AccommodationSearchModel): Observable<any> {
-        // this.universityAccommodationAdds = [];
         return this.simpleSearchService.getSimpleSearchAdds(filters);
     }
     ngOnDestroy() {

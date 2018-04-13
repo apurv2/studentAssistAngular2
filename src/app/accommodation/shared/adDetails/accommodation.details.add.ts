@@ -111,4 +111,8 @@ export class AddDetails {
 
         this.addDetailService.deleteAdd(url).subscribe(res => console.log(res));
     }
+
+    deletePromptNo(){
+        this.deletePrompt = false;
+    }
 }
