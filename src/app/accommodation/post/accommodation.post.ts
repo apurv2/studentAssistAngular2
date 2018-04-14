@@ -217,11 +217,23 @@ export class PostAccommodation {
     }
 
     addFile(files: any) {
+        let allowedExtensions = ["jpg", "png", "jpeg"];
         for (let photoFile of files.files) {
+
+            let fileExtension: string = photoFile.name.split('.').pop();
+            if (!this.isInArray(allowedExtensions, fileExtension)) {
+                this.sharedDataService.openSnackBar(this.snackBar, "only  jpg, jpeg and png file extension are allowed", "");
+                continue;
+
+            }
             let reader = new FileReader();
             reader.onload = (e) => this.photos.push(e.target['result']);
             reader.readAsDataURL(photoFile);
         }
+    }
+
+    isInArray(array, word) {
+        return array.indexOf(word.toLowerCase()) > -1;
     }
 
     uploadImages() {
