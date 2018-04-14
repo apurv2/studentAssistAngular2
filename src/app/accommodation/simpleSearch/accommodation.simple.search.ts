@@ -22,7 +22,9 @@ export class SimpleSearch {
     universityAccommodationAdds: UniversityAccommodationAdds[];
     accommodationFiltersObservable: Subscription;
     accommodationAddSubscription: Subscription;
-
+    loadedFirstTime: boolean = false;
+    noData: boolean = false;
+    
     @ViewChild('filters') filters: SimpleSearchAddsFilters;
 
     constructor(private simpleSearchService: SimpleSearchService,
@@ -50,7 +52,9 @@ export class SimpleSearch {
 
                 if (this.universityAccommodationAdds.length == 0) {
                     this.filters.stopLoding();
+                    this.noData = true;
                 }
+                this.loadedFirstTime = true;
 
             });
     }

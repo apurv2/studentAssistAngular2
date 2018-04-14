@@ -28,8 +28,7 @@ export class AddsList {
 
     ngOnChanges() {
         if (this.accommodationAdds != null && this.accommodationAdds.length > 0) {
-            this.sharedDataService.emitAccommodationAdd(
-                this.accommodationAdds[0]);
+            this.addClick(this.accommodationAdds[0]);
         }
     }
 

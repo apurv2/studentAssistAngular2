@@ -6,7 +6,7 @@
           <img class="univCardImg" src="{{university.urls}}" />
           <h4 class="univhead">{{university.universityName}}</h4>
         </div>
-        <div class="collapsible-body height-400 overflow-auto">
+        <div class="collapsible-body max-height-400 overflow-auto">
           <div *ngFor="let accommodationAdd of university?.accommodationAdds">
             <div [class.active-bg]="accommodationAdd.addId==selectedItemId" class="card animated-card1 horizontal-card" (click)="addClick(accommodationAdd, $event)">
               <div class="media">
