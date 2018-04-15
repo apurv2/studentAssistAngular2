@@ -11,7 +11,7 @@ import { AddDetailsService } from "app/accommodation/shared/adDetails/accommodat
 import { environment } from "environments/environment";
 import { Http } from "@angular/http";
 import { CopyLinkModal } from "../modals/copy.link.modal";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -31,10 +31,12 @@ export class AddDetails {
     deletePrompt: boolean = false;
 
     constructor(private dialog: MatDialog,
+        private sharedDataService: SharedDataService,
         private userService: UserService,
         private fb: FacebookService,
         private addDetailService: AddDetailsService,
         private route: ActivatedRoute,
+        private router: Router,
         private http: Http) { }
     ngOnInit() {
 
@@ -79,6 +81,8 @@ export class AddDetails {
             });
     }
 
+
+
     subscribe() {
 
         this.userService.getLoginStatus().
@@ -109,10 +113,11 @@ export class AddDetails {
             + '?' + environment.addId + '='
             + this.selectedAccommodationAdd.addId;
 
-        this.addDetailService.deleteAdd(url).subscribe(res => console.log(res));
+        this.addDetailService.deleteAdd(url).flatMap(res => this.sharedDataService.openSuccessFailureDialog(res, this.dialog, "Your listing has been removed!"))
+            .subscribe(e => this.router.navigate(['/dashboard/']))
     }
 
-    deletePromptNo(){
+    deletePromptNo() {
         this.deletePrompt = false;
     }
 }
