@@ -1128,7 +1128,7 @@ input.mat-chip-input {
    /* background: #FFF;*/
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
- /*   border-top: 7px solid #32508E;*/
+   border-top: 7px solid #32508E;
   }
   #login-box img
 {
@@ -1212,6 +1212,7 @@ input.mat-chip-input {
     left: 22%;
     position: relative;
     height: 30px;
+    cursor: pointer;
   }
   .fb-btn i{
     font-size: 55px;
