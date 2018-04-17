@@ -1,4 +1,4 @@
-<div id="detailCard" class="card animated-card1 detail-card">
+<div id="detailCard" class="card animated-card1 detail-card" [class.shared-detail-page]="sharedLink">
     <div class="view-details image-container overflow-hidden">
         <div *ngIf="!deletePrompt" class="overlap-content">
             <h2 class="pull-left margin-top-0">{{selectedAccommodationAdd?.apartmentName}}</h2>

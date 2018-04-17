@@ -88,18 +88,17 @@ export class AdvancedSearchFilters {
     }
 
     searchClicked() {
-
+        this.sharedDataService.emitAccommomdationSearchFilters(this.getCurrentFilters());
+    }
+    getCurrentFilters(): AccommodationSearchModel {
         let filterData: AccommodationSearchModel = new AccommodationSearchModel();
 
         filterData.apartmentName = this.aptNameSpinnerSelectedItem.description;
         filterData.apartmentType = this.aptTypeSpinnerSelectedItem.code;
         filterData.gender = this.genderSpinnerSelectedItem.code;
         filterData.selectedUniversityId = +this.universityNameSpinnerSelectedItem.code;
-
-        this.sharedDataService.emitAccommomdationSearchFilters(filterData);
-
+        return filterData;
     }
-
     spinnerClick(clickedItem) {
         this.populateApartmentNameSpinner();
     }

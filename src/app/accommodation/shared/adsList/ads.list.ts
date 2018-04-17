@@ -19,6 +19,7 @@ export class AddsList {
     showVisited: boolean;
 
     selectedItemId: number;
+    paginating: boolean = false;
 
 
     constructor(private sharedDataService: SharedDataService,
@@ -43,5 +44,14 @@ export class AddsList {
 
         this.selectedItemId = accommodationAdd.addId;
         this.sharedDataService.emitAccommodationAdd(accommodationAdd);
+    }
+
+    paginationClick() {
+        this.paginating = true;
+
+
+
+
+        // selectedUniversity.stopPagination = data.length < 10;
     }
 }
