@@ -1,4 +1,5 @@
 <div class="row">
+    <div>
     <div *ngFor="let accommodationAdd of accommodationAdds" class="col-xs-12 col-sm-6 col-md-12">
 
         <div [class.active-bg]="accommodationAdd.addId==selectedItemId" class="card animated-card1 horizontal-card" (click)="addClick(accommodationAdd)">
@@ -28,9 +29,10 @@
             </div>
         </div>
     </div>
-
-    <div *ngIf="accommodationAdds?.length >= 10 && !stopPagination">
-        <a class="load-more" *ngIf="!paginating" href="javascript:void(0)" (click)="paginationClick()">Load More</a>
-        <mat-spinner class="load-more" [diameter]="40" *ngIf="paginating"></mat-spinner>
+   
+        <div *ngIf="accommodationAdds?.length >= 10 && !stopPagination">
+         <a class="load-more" href="javascript:void(0)" (click)="paginationClick()">Load More</a> 
+            <mat-spinner class="load-more" [diameter]="40"></mat-spinner>
+        </div> 
     </div>
 </div>
