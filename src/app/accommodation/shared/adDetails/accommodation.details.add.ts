@@ -29,6 +29,7 @@ export class AddDetails {
     items: Array<any> = []
     loggedInUserId: number;
     deletePrompt: boolean = false;
+    sharedLink: boolean = false;
 
     constructor(private dialog: MatDialog,
         private sharedDataService: SharedDataService,
@@ -45,6 +46,7 @@ export class AddDetails {
             .queryParams
             .filter(params => params['addId'] > 0)
             .flatMap(data => this.addDetailService.getAddDetailsFromAddId(data.addId))
+            .do(e => this.sharedLink = true)
             .subscribe((params: AccommodationAdd) => {
                 this.selectedAccommodationAdd = params;
             });

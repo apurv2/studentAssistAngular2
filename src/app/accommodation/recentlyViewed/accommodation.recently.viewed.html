@@ -6,8 +6,9 @@
         <img src="./assets/images/nodatafound.png" alt="" title="">
     </div>
     <div *ngIf="!noData">
+
         <div class="col-xs-12 col-sm-12 col-md-4 overflow-auto adv-card-list recent-panel">
-            <adds-list [accommodationAdds]="accommodationAdds" [showVisited]="false"></adds-list>
+            <adds-list #addsList [accommodationAdds]="accommodationAdds" [showVisited]="false" (paginationEvent)="paginationEvent($event)"></adds-list>
         </div>
         <accommodation-details [selectedAccommodationAdd]="selectedAccommodationAdd"></accommodation-details>
     </div>
