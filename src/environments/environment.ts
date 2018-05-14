@@ -121,6 +121,10 @@ export const environment = {
   searchLearned: 'searchLearned',
   edtAddId: 'editAddId',
   editUnivId: 'editUnivId',
-  getUniversityDetails: 'profile/getUniversityDetails'
+  getUniversityDetails: 'profile/getUniversityDetails',
+  savePost: "Save Post",
+  updatePost: "Update Post",
+  editAccommodationAdd:'profile/editAccommodationAdd'
+
 
 }

@@ -38,6 +38,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class PostAccommodation implements ErrorHandler {
 
 
+    deleteClicked: boolean = false;
     aptTypeSpinnerValues: AccommodationDropdown[] = []
     aptNameSpinnerValues: AccommodationDropdown[] = []
     universityNameSpinnerValues: AccommodationDropdown[] = []
@@ -55,7 +56,7 @@ export class PostAccommodation implements ErrorHandler {
     selectedUniversities: University[];
     allApartments: Apartment[];
     matcher = new MyErrorStateMatcher();
-    photos: File[] = [];
+    photos: any[] = [];
     cost: number;
     notes: string;
     email: string;
@@ -86,7 +87,9 @@ export class PostAccommodation implements ErrorHandler {
     showAddApartment: boolean = true;
     apartmentTooltipText: string;
     fbId: string;
-    editPhotos: string[];
+    saveOrUpdate: string = environment.savePost;
+    isUpdate: boolean = false;
+    editAccommodationAdd: AccommodationAdd;
 
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
@@ -138,12 +141,12 @@ export class PostAccommodation implements ErrorHandler {
         let universities = Object.assign([], temp);
 
         if (editAddId && editUnivId > 0) {
-
+            this.saveOrUpdate = environment.updatePost;
             let univUrl = environment.getUniversityDetails + "/" + editUnivId;
             Observable.forkJoin(this.addDetailService.getAddDetailsFromAddId(editAddId),
                 this.postAccommodationService.getUniversityDetails(univUrl))
                 .subscribe(response => {
-
+                    this.isUpdate = true;
                     let accommodationAdd: AccommodationAdd = response[0];
                     let university: University = response[1];
 
@@ -246,7 +249,17 @@ export class PostAccommodation implements ErrorHandler {
     }
 
     postAccommodation(userInfo?: UserInfo) {
-        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
+
+        if (this.isUpdate) {
+            if (this.deleteClicked && this.photos.length > 0) {
+                return this.uploadImages()
+            }
+            else
+                return this.deleteClicked ? this.postAccommodationAdd(null, userInfo) :
+                    this.postAccommodationAdd(this.editAccommodationAdd.addPhotoIds, userInfo);
+        }
+        else
+            return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
     }
 
     openLoginDialog() {
@@ -294,6 +307,7 @@ export class PostAccommodation implements ErrorHandler {
     }
 
     deleteAllPhotos() {
+        this.deleteClicked = true;
         this.photos.length = 0;
     }
 
@@ -309,6 +323,10 @@ export class PostAccommodation implements ErrorHandler {
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
 
         let url = this.adminUser ? environment.createAccommodationAddFromFacebook : environment.createAccommodationAdd;
+        if (this.editAccommodationAdd) {
+            url = environment.editAccommodationAdd;
+            accommodationAdd.addId = this.editAccommodationAdd.addId;
+        }
         return this.postAccommodationService
             .postAccommodation(url, accommodationAdd);
     }
@@ -399,9 +417,10 @@ export class PostAccommodation implements ErrorHandler {
             this.vacanciesSpinnerSelectedItem = Object.assign([], this.vacanciesSpinnerValues.find(apt => add.vacancies == +apt.description));
             this.cost = add.cost;
             this.notes = add.notes;
-            add.addPhotoIds.forEach(photo => this.editPhotos.push(photo));
+            add.addPhotoIds.forEach(photo => this.photos.push(photo));
             let postedDate: Date = new Date(add.postedTill);
             this.dateAvailableTill = new FormControl(postedDate.toISOString());
+            this.editAccommodationAdd = add;
         });
     }
 
