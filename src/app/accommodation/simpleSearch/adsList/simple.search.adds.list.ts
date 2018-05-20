@@ -40,7 +40,10 @@ export class SimpleSearchAddsList {
 
     ngOnChanges() {
         if (this.accommodationSearchResults != null && this.accommodationSearchResults.length > 0) {
-            this.addClick(this.accommodationSearchResults[0].accommodationAdds[0]);
+
+            if (window.innerWidth > 767) {
+                this.addClick(this.accommodationSearchResults[0].accommodationAdds[0]);
+            }
 
             this.timerObservable = Observable
                 .interval(300)
@@ -96,24 +99,9 @@ export class SimpleSearchAddsList {
             });
     }
 
-    @HostListener('window:popstate', ['$event'])
-    onPopState(event) {
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        if (window.innerWidth < 767) {
-            document.getElementById("detailCard").style.display = 'none';
-            document.getElementById("simpleSearchList").style.display = 'block';
-        }
-        console.log('Back button pressed');
-
-        return false;
-    }
-
     ngOnDestroy() {
-        if(this.timerObservable!=null)
-        this.timerObservable.unsubscribe();
+        if (this.timerObservable != null)
+            this.timerObservable.unsubscribe();
     }
 
 }
