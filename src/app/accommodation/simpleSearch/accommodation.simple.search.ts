@@ -23,6 +23,8 @@ export class SimpleSearch {
     universityAccommodationAdds: UniversityAccommodationAdds[];
     accommodationFiltersObservable: Subscription;
     accommodationAddSubscription: Subscription;
+    loadedFirstTime: boolean = false;
+    noData: boolean = false;
 
     @ViewChild('filters') filters: SimpleSearchAddsFilters;
     @ViewChild('simpleSearchList') simpleSearchList: SimpleSearchAddsList;
@@ -49,12 +51,18 @@ export class SimpleSearch {
             switchMap(filters => this.getSimpleSearchAdds(filters)).
             subscribe(universityAccommodationAdds => {
                 this.universityAccommodationAdds = universityAccommodationAdds;
+                this.noData = this.universityAccommodationAdds.length == 0;
                 this.filters.stopLoding();
-            });
+                this.loadedFirstTime = true;
+            },
+                err => {
+                    this.noData = true;
+                    this.filters.stopLoding();
+                    this.loadedFirstTime = true;
+                });
     }
 
     getSimpleSearchAdds(filters: AccommodationSearchModel): Observable<any> {
-        // this.universityAccommodationAdds = [];
         return this.simpleSearchService.getSimpleSearchAdds(filters);
     }
     ngOnDestroy() {

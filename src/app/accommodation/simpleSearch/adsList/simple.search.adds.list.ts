@@ -37,20 +37,29 @@ export class SimpleSearchAddsList {
 
     ngOnInit() {
         $('.collapsible').collapsible();
-
-        this.timerObservable = Observable
-            .interval(2000)
-            .first()
-            .subscribe(x => $('.collapsible').collapsible('open', 0));
     }
 
     ngOnChanges() {
         if (this.accommodationSearchResults != null && this.accommodationSearchResults.length > 0) {
-            this.sharedDataService.emitAccommodationAdd(
-                this.accommodationSearchResults[0].accommodationAdds[0]);
-            this.filters.stopLoding();
+
+            if (window.innerWidth > 767) {
+                this.addClick(this.accommodationSearchResults[0].accommodationAdds[0]);
+            }
+
+            this.timerObservable = Observable
+                .interval(300)
+                .first()
+                .subscribe(x => {
+                    $('.collapsible').collapsible('open', 0);
+                    this.filters.stopLoding();
+                });
         }
     }
+
+    universityClick() {
+        this.timerObservable.unsubscribe();
+    }
+
 
     addClick(accommodationAdd: AccommodationAdd) {
         if (!accommodationAdd.userVisitedSw) {
@@ -91,18 +100,18 @@ export class SimpleSearchAddsList {
             });
     }
 
-    @HostListener('window:popstate', ['$event'])
-    onPopState(event) {
+    showList() {
 
         if (window.innerWidth < 767) {
+            this.showingDetails = false;
             document.getElementById("detailCard").style.display = 'none';
             document.getElementById("simpleSearchList").style.display = 'block';
-            // this.showingDetails = false;
         }
     }
 
     ngOnDestroy() {
-        this.timerObservable.unsubscribe();
+        if (this.timerObservable != null)
+            this.timerObservable.unsubscribe();
     }
 
 }

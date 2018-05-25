@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ErrorHandler } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { AccommodationDropdown } from '../shared/models/accommodation.dropdown.model';
 import { Apartment } from '../shared/models/apartment.names.model';
@@ -15,11 +15,12 @@ import { CloudinaryOptions } from 'ng2-cloudinary/dist/esm/src/cloudinary-option
 import { PostAccommodationService } from 'app/accommodation/post/accommodation.post.service';
 import { Observable } from 'rxjs/Observable';
 import { AccommodationAdd } from 'app/accommodation/shared/models/accommodation.model';
-import { SuccessOrFailureModal } from 'app/shared/modals/success.or.failure';
 import { University } from 'app/universities/universities.model';
 import { UserService } from 'app/shared/userServices/user.service';
 import { NewApartmentModal } from './newApartment/new.apartment.modal';
 import { UserInfo } from '../../shared/models/user.info.model';
+import { Universities } from '../../universities/universities.list';
+import { AddDetailsService } from '../shared/adDetails/accommodation.details.add.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -34,8 +35,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     selector: 'accommodation-post',
     templateUrl: 'accommodation.post.html'
 })
-export class PostAccommodation {
+export class PostAccommodation implements ErrorHandler {
 
+
+    deleteClicked: boolean = false;
     aptTypeSpinnerValues: AccommodationDropdown[] = []
     aptNameSpinnerValues: AccommodationDropdown[] = []
     universityNameSpinnerValues: AccommodationDropdown[] = []
@@ -49,10 +52,11 @@ export class PostAccommodation {
     aptNameSpinnerSelectedItem: AccommodationDropdown;
     universityNameSpinnerSelectedItem: AccommodationDropdown;
     genderSpinnerSelectedItem: AccommodationDropdown;
+
     selectedUniversities: University[];
     allApartments: Apartment[];
     matcher = new MyErrorStateMatcher();
-    photos: File[] = [];
+    photos: any[] = [];
     cost: number;
     notes: string;
     email: string;
@@ -83,6 +87,9 @@ export class PostAccommodation {
     showAddApartment: boolean = true;
     apartmentTooltipText: string;
     fbId: string;
+    saveOrUpdate: string = environment.savePost;
+    isUpdate: boolean = false;
+    editAccommodationAdd: AccommodationAdd;
 
     constructor(private sharedDataService: SharedDataService,
         private simpleSearchFilterService: SimpleSearchFilterService,
@@ -90,7 +97,9 @@ export class PostAccommodation {
         private userService: UserService,
         private postAccommodationService: PostAccommodationService,
         private snackBar: MatSnackBar,
-        private router: Router) { }
+        private router: Router,
+        private route: ActivatedRoute,
+        private addDetailService: AddDetailsService) { }
 
     ngOnInit() {
 
@@ -120,18 +129,51 @@ export class PostAccommodation {
         this.aptTypeSpinnerSelectedItem = Object.assign([], this.aptTypeSpinnerValues[0]);
         this.genderSpinnerSelectedItem = Object.assign([], this.genderSpinnerValues[0]);
 
-        let universities: University[] = this.sharedDataService.getUserSelectedUniversitiesList();
-        if (universities) {
+        let editAddId: boolean = false;
+        let editUnivId: number = 0;
+        this.route.params.subscribe(
+            params => {
+                editAddId = (params[environment.edtAddId]);
+                editUnivId = (params[environment.editUnivId]);
+            });
+
+        let temp: University[] = this.sharedDataService.getUserSelectedUniversitiesList();
+        let universities = Object.assign([], temp);
+
+        if (editAddId && editUnivId > 0) {
+            this.saveOrUpdate = environment.updatePost;
+            let univUrl = environment.getUniversityDetails + "/" + editUnivId;
+            Observable.forkJoin(this.addDetailService.getAddDetailsFromAddId(editAddId),
+                this.postAccommodationService.getUniversityDetails(univUrl))
+                .subscribe(response => {
+                    this.isUpdate = true;
+                    let accommodationAdd: AccommodationAdd = response[0];
+                    let university: University = response[1];
+
+                    if (universities == null) {
+                        universities = new Array();
+                    }
+                    let univIndex: number = universities.findIndex(univ => university.universityId == univ.universityId);
+                    this.populateEditAdd(accommodationAdd, universities);
+                    if (univIndex > 0) {
+                        this.initializeUniversityNames(universities, univIndex);
+                    } else {
+                        universities.push(university);
+                        this.initializeUniversityNames(universities, universities.length - 1);
+                    }
+
+
+                });
+        }
+        else {
             this.initializtApartmentNames(universities).subscribe();
         }
-        this.initializeUniversityNames();
+        this.initializeUniversityNames(universities, 0);
     }
 
-    initializeUniversityNames() {
-
-        this.selectedUniversities = this.sharedDataService.getUserSelectedUniversitiesList() != null ?
-            this.sharedDataService.getUserSelectedUniversitiesList() : new Array<University>();
-        this.mapUniversityNames(this.selectedUniversities);
+    initializeUniversityNames(universities: University[], position: number) {
+        this.selectedUniversities = universities;
+        this.mapUniversityNames(universities, position);
     }
     initializtApartmentNames(universities: University[], apartmentId?: number) {
         let filterData: AccommodationSearchModel = new AccommodationSearchModel();
@@ -145,14 +187,14 @@ export class PostAccommodation {
         this.populateApartmentNameSpinner(apartmentId);
     }
 
-    mapUniversityNames(selectedUniversities: University[]) {
+    mapUniversityNames(selectedUniversities: University[], index: number) {
         for (let university of selectedUniversities) {
             this.universityNameSpinnerValues.push({
                 'code': university.universityId + '',
                 'description': university.universityName
             });
         }
-        this.universityNameSpinnerSelectedItem = Object.assign([], this.universityNameSpinnerValues[0]);
+        this.universityNameSpinnerSelectedItem = Object.assign([], this.universityNameSpinnerValues[index]);
     }
 
     spinnerClick(clickedItem) {
@@ -196,19 +238,28 @@ export class PostAccommodation {
                 else return resp;
             })
             .flatMap((userInfo: UserInfo) => this.postAccommodation(userInfo))
-            .subscribe(e => {
-                this.sharedDataService.openSuccessFailureDialog(e, this.dialog)
-                    .subscribe(e => this.router.navigate(['/dashboard/']));
-                this.loading = false;
-            }, err => {
-                this.loading = false;
-                console.log(err);
-                this.sharedDataService.openSuccessFailureDialog("failure", this.dialog).subscribe();;
-            });
+            .do(e => this.loading = false)
+            .flatMap(e => this.sharedDataService.openSuccessFailureDialog(e, this.dialog, "Congratulations your listing has been successfully posted"))
+            .subscribe(e => this.router.navigate(['/dashboard/']),
+                err => {
+                    this.loading = false;
+                    console.log(err);
+                    this.sharedDataService.openSuccessFailureDialog("failure", this.dialog).subscribe();;
+                });
     }
 
     postAccommodation(userInfo?: UserInfo) {
-        return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
+
+        if (this.isUpdate) {
+            if (this.deleteClicked && this.photos.length > 0) {
+                return this.uploadImages()
+            }
+            else
+                return this.deleteClicked ? this.postAccommodationAdd(null, userInfo) :
+                    this.postAccommodationAdd(this.editAccommodationAdd.addPhotoIds, userInfo);
+        }
+        else
+            return this.photos.length > 0 ? this.uploadImages() : this.postAccommodationAdd(null, userInfo);
     }
 
     openLoginDialog() {
@@ -217,11 +268,27 @@ export class PostAccommodation {
     }
 
     addFile(files: any) {
+        let allowedExtensions = ["jpg", "png", "jpeg"];
+        if ((this.photos != null && this.photos.length == 3) || (files.files != null && files.files.length > 3)) {
+            this.sharedDataService.openSnackBar(this.snackBar, "We can only upload upto 3 photos for you :)", "");
+            return;
+        }
         for (let photoFile of files.files) {
+
+            let fileExtension: string = photoFile.name.split('.').pop();
+            if (!this.isInArray(allowedExtensions, fileExtension)) {
+                this.sharedDataService.openSnackBar(this.snackBar, "only  jpg, jpeg and png file extension are allowed", "");
+                continue;
+
+            }
             let reader = new FileReader();
             reader.onload = (e) => this.photos.push(e.target['result']);
             reader.readAsDataURL(photoFile);
         }
+    }
+
+    isInArray(array, word) {
+        return array.indexOf(word.toLowerCase()) > -1;
     }
 
     uploadImages() {
@@ -239,6 +306,11 @@ export class PostAccommodation {
 
     }
 
+    deleteAllPhotos() {
+        this.deleteClicked = true;
+        this.photos.length = 0;
+    }
+
     private createUploadParams(photo) {
         let formData: FormData = new FormData();
         formData.append(environment.upload_preset, environment.CLOUDINARY_PRESET_VALUE);
@@ -251,6 +323,10 @@ export class PostAccommodation {
         if (photoUrls != null) { accommodationAdd.addPhotoIds = photoUrls }
 
         let url = this.adminUser ? environment.createAccommodationAddFromFacebook : environment.createAccommodationAdd;
+        if (this.editAccommodationAdd) {
+            url = environment.editAccommodationAdd;
+            accommodationAdd.addId = this.editAccommodationAdd.addId;
+        }
         return this.postAccommodationService
             .postAccommodation(url, accommodationAdd);
     }
@@ -308,8 +384,9 @@ export class PostAccommodation {
     }
 
     checkAdminUser() {
-
-        this.getUserDetails()
+        this.userService.getLoginStatus()
+            .filter(resp => resp)
+            .flatMap(e => this.getUserDetails())
             .flatMap(userInfo => this.userService.checkAdmin())
             .subscribe(data => this.adminUser = data, err => console.log("not looged in"));
 
@@ -328,5 +405,27 @@ export class PostAccommodation {
 
                 })
         }
+    }
+
+    populateEditAdd(add: AccommodationAdd, universities: University[]) {
+
+        this.initializtApartmentNames(universities).subscribe(e => {
+            this.aptTypeSpinnerSelectedItem = Object.assign([], this.aptTypeSpinnerValues.find(apt => add.apartmentType == apt.description));
+            this.populateApartmentNameSpinner(add.apartmentId);
+            this.genderSpinnerSelectedItem = Object.assign([], this.genderSpinnerValues.find(apt => add.gender == apt.description));
+            this.noOfRoomsSpinnerSelectedItem = Object.assign([], this.noOfRoomsSpinnerValues.find(apt => add.noOfRooms == apt.description.replace(/ /g, '')));
+            this.vacanciesSpinnerSelectedItem = Object.assign([], this.vacanciesSpinnerValues.find(apt => add.vacancies == +apt.description));
+            this.cost = add.cost;
+            this.notes = add.notes;
+            add.addPhotoIds.forEach(photo => this.photos.push(photo));
+            let postedDate: Date = new Date(add.postedTill);
+            this.dateAvailableTill = new FormControl(postedDate.toISOString());
+            this.editAccommodationAdd = add;
+        });
+    }
+
+    handleError(error) {
+        // exception occured in some service class method.
+        console.log('Error in MyErrorhandler - %s', error);
     }
 }

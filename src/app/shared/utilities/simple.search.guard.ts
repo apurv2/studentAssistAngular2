@@ -11,6 +11,7 @@ export class SimpleSearchGuard implements CanDeactivate<SimpleSearch> {
         if (window.innerWidth < 767) {
             if (component.simpleSearchList.showingDetails) {
                 component.simpleSearchList.showingDetails = false;
+                component.simpleSearchList.showList();
                 return false;
             }
             return true;

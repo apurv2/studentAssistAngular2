@@ -111,5 +111,13 @@ export const environment = {
   getAccommodationFromAddId: 'getAccommodationFromAddId',
   noDataGif: '',
   getAccommodationNotifications: 'profile/getAccommodationNotifications',
-  getRecentlyViewedAdds: 'profile/getRecentlyViewed'
+  getRecentlyViewedAdds: 'profile/getRecentlyViewed',
+  searchLearned: 'searchLearned',
+  edtAddId: 'editAddId',
+  editUnivId: 'editUnivId',
+  getUniversityDetails: 'profile/getUniversityDetails',
+  savePost: "Save Post",
+  updatePost: "Update Post",
+  editAccommodationAdd: 'profile/editAccommodationAdd'
+
 };
