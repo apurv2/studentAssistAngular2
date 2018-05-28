@@ -125,7 +125,5 @@ export const environment = {
   savePost: "Save Post",
   updatePost: "Update Post",
   editAccommodationAdd: 'profile/editAccommodationAdd',
-  dashboard: '/dashboard'
-
-
+  allUniversities: '/universities/all'
 }
