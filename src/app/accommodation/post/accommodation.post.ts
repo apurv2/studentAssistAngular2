@@ -369,7 +369,7 @@ export class PostAccommodation implements ErrorHandler {
             .afterClosed()
             .filter((apartmentInfo: Apartment) => apartmentInfo != null)
             .flatMap((apartmentInfo: Apartment) => this.postAccommodationService.addApartment(environment.addNewApartment, apartmentInfo))
-            .filter(response => parseInt(response) > 0)
+            .filter(apartmentId => parseInt(apartmentId) > 0)
             .switchMap(apartmentId => this.initializtApartmentNames(this.sharedDataService.getUserSelectedUniversitiesList(), +apartmentId))
             .subscribe(() => {
                 this.showAddApartment = false
