@@ -81,7 +81,8 @@ a{
     width: 120px;
 }
 .height-400{
-    height: 400px;
+  /* height: 400px;*/
+  height: 560px;
 }
 .vertical-middle .media-left, .vertical-middle .media-body{
     vertical-align: middle;
@@ -1539,6 +1540,22 @@ top:15px;
     {
         width:100% !important;
     }
+    .univ-icon
+    {
+        width: 40px !important;
+        height: 40px !important;
+    }
+    .map-form h4{
+        font-size: 14px !important;
+        margin-left: 50px !important;
+        top: 5px !important;
+        left: 0px !important;
+    }
+    .post-accom-form
+    {
+        height: 100% !important;
+        padding-bottom: 15px;
+    }
 }
 @media (max-width:980px){
       .vertical-card:hover {
@@ -1851,8 +1868,8 @@ top: 0;
 z-index: 1;
 display: inline-block;
 background: #fff;
-width: 60px;
-height: 60px;
+width: 48px;
+height: 48px;
 border-radius: 100%;
 padding: 10px;
 margin: 2px;
@@ -1963,7 +1980,7 @@ margin: 0 auto;
 .overlap-error-content{
     position: absolute;
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     background: #fb6362;
     z-index: 4;
     color:#000;
@@ -1971,6 +1988,7 @@ margin: 0 auto;
 .overlap-error-content h2
 {
     font-weight: 300;
+    font-size: 22px;
 }
 .address i{
     font-size: 20px;
