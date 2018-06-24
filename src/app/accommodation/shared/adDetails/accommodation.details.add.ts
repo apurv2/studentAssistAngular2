@@ -25,6 +25,12 @@ export class AddDetails {
     selectedAccommodationAdd: AccommodationAdd;
     @Input()
     enableSubscription: boolean;
+    @Input()
+    set popup(popup: boolean) {
+        if (popup) {
+            document.getElementById("detailCard").style.display = 'block';
+        }
+    }
 
     items: Array<any> = []
     loggedInUserId: number;
