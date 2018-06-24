@@ -1,5 +1,5 @@
 export const environment = {
-  url: 'http://stud.us-east-1.elasticbeanstalk.com/',
+  url: 'http://localhost:8080/',
   production: false,
   appId: '931333680308184',
   APARTMENT_NAME: "apartmentName",
