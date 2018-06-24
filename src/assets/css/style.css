@@ -1515,7 +1515,7 @@ top:15px;
     }
     .detail-card
     {
-       /* display: none;*/
+       display: none;
     }
     .mat-chip {
         margin-left: 5px;
@@ -1978,8 +1978,8 @@ margin: 0 auto;
     color:#fb6362;
 }
 .overlap-error-content{
-    position: absolute;
-    width: 100%;
+    position: relative;
+   /* width: 100%;*/
     padding: 10px;
     background: #fb6362;
     z-index: 4;

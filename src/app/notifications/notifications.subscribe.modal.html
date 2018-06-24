@@ -7,7 +7,7 @@
         </div>
 
         <div *ngIf="backPrompt" class="row popup-head overlap-error-content">
-            <h2 class="pull-left margin-top-0">Going back will delete your current settings!! Are you sure?</h2>
+            <h3>Going back will delete your current settings!! Are you sure?</h3>
             <button (click)="backConfirm()" class="btn confirm-btn">Yes</button>
             <button (click)="backPromptNo()" class="btn confirm-btn">No</button>
         </div>
@@ -21,8 +21,7 @@
                             <h4>Please select a university</h4>
 
                             <mat-radio-group [(ngModel)]="selectedUniversityId">
-                                <mat-radio-button class="col-sm-8 col-md-8  col-xs-12" *ngFor="let university of notificationSettings
-                                .allUnivDetails" [value]="university.universityId">
+                                <mat-radio-button class="col-sm-8 col-md-8  col-xs-12" *ngFor="let university of allUniversities" [value]="university.universityId">
                                     {{university.universityName}}
                                 </mat-radio-button>
                             </mat-radio-group>
@@ -68,17 +67,16 @@
                         </mat-radio-group>
                     </div>
                     <div class="row">
-                        <h4>Apartment Names</h4>
-                        <h5>Optional</h5>
+                        <h4>Apartment Names</h4><h5>Optional</h5>
 
                         <div *ngIf="aptTypeVisibility.on">
                             <h4>On-campus</h4>
                             <div class="border"></div>
                             <div class="row">
-                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartment of selectedUniversityDetails?.apartments 
+                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'on'">
-                                    <mat-checkbox [(ngModel)]="apartment.selected">
-                                        {{apartment.apartmentName}}</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">
+                                        {{apartmentName.apartmentName}}</mat-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -86,9 +84,9 @@
                             <h4>Off-campus</h4>
                             <div class="border"></div>
                             <div class="row">
-                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartment of selectedUniversityDetails?.apartments 
+                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'off'">
-                                    <mat-checkbox [(ngModel)]="apartment.selected">{{apartment.apartmentName}}</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                                 </div>
                             </div>
                         </div>
@@ -96,15 +94,17 @@
                             <h4>Dorms</h4>
                             <div class="border"></div>
                             <div class="row">
-                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartment of selectedUniversityDetails?.apartments 
+                                <div class="col-sm-6 col-md-4 col-xs-12" *ngFor="let apartmentName of selectedUniversityDetails?.apartmentNames 
             | notificationSettingsFilter : 'dorms'">
-                                    <mat-checkbox [(ngModel)]="apartment.selected">{{apartment.apartmentName}}</mat-checkbox>
+                                    <mat-checkbox [(ngModel)]="aptNameCheckboxes[apartmentName.apartmentName] === undefined ? '' :aptNameCheckboxes[apartmentName.apartmentName].value">{{apartmentName.apartmentName}}</mat-checkbox>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="form-group col-md-8 col-md-push-3">
+                                <button type="submit" [disabled]="isEmptyObject(aptTypeCheckboxes)" (click)="subscribe()" class="btn primary-btn btn-lg width-120">Unsubscribe</button>
+                
                                 <button type="submit" [disabled]="isEmptyObject(aptTypeCheckboxes)" (click)="subscribe()" class="btn primary-btn btn-lg width-120">Subscribe</button>
                                 <button type="submit" (click)="close()" class="btn primary-btn btn-lg width-120">Close</button>
                             </div>
