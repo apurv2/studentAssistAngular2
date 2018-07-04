@@ -56,7 +56,8 @@ export class SubscribeNotificationsModal {
                     this.prePopulateNotificationSettings();
                     this.isLoading = false;
                 }, 500);
-            });
+            },
+                err => this.dialogRef.close(err));
 
     }
 
