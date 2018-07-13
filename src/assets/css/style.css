@@ -78,7 +78,7 @@ a{
     width: 80px;
 }
 .width-120{
-    width: 120px;
+    width: 110px;
 }
 .height-400{
   /* height: 400px;*/
@@ -1530,7 +1530,8 @@ top:15px;
         font-size: 14px;
     }
     .h3, h3 {
-        font-size: 22px;
+        font-size: 20px !important;
+        padding-left: 10px !important;
     }
     .cls-page-header h3
     {
@@ -1555,6 +1556,13 @@ top:15px;
     {
         height: 100% !important;
         padding-bottom: 15px;
+    }
+    .truncate
+    {
+        width: 200px !important;
+    }
+    .sucess-popup{
+        width: 300px !important;
     }
 }
 @media (max-width:980px){
